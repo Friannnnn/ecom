@@ -20,7 +20,7 @@ if (isset($_GET['code'])) {
     $_SESSION['name'] = $userInfo->name;
     $_SESSION['picture'] = $userInfo->picture;
 
-    header('Location: profile.php');
+    header('Location: dashboard.php');
     exit();
 } else {
     echo "No code received.";

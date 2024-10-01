@@ -11,6 +11,10 @@ $googleClient->setRedirectUri('http://localhost/ecom/callback.php');
 $googleClient->addScope('email');
 $googleClient->addScope('profile');
 
+if (isset($_SESSION['name'])) {
+    header("location: profile.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -23,3 +27,4 @@ $googleClient->addScope('profile');
     <a href="<?php echo htmlspecialchars($googleClient->createAuthUrl()); ?>">Login with Google</a>
 </body>
 </html>
+

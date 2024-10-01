@@ -21,5 +21,6 @@ if (!isset($_SESSION['email'])) {
     <p><img src="<?= htmlspecialchars($_SESSION['picture']); ?>" alt="Profile Picture"></p>
 
     <a href="logout.php">Logout</a>
+    <a href="dashboard.php">Back to Dashboard</a>
 </body>
 </html>
