@@ -7,20 +7,9 @@ if (!isset($_SESSION['email'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-</head>
-<body>
-    <p>Authenticated as <?= htmlspecialchars($_SESSION['email']); ?></p>
+<div id="content"> <!-- This ID is necessary for AJAX content loading -->
     <h2>Welcome, <?= htmlspecialchars($_SESSION['name']); ?>!</h2>
     <p>Email: <?= htmlspecialchars($_SESSION['email']); ?></p>
-    <p><img src="<?= htmlspecialchars($_SESSION['picture']); ?>" alt="Profile Picture"></p>
-
-    <a href="logout.php">Logout</a>
-    <a href="dashboard.php">Back to Dashboard</a>
-</body>
-</html>
+    <p><img src="<?= htmlspecialchars($_SESSION['picture']); ?>" alt="Profile Picture" width="150" height="150"></p>
+    <a href="logout.php" class="btn btn-danger">Logout</a>
+</div>
