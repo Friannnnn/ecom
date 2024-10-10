@@ -7,7 +7,7 @@ if (!isset($_SESSION['email'])) {
 }
 ?>
 
-<div id="content"> <!-- This ID is necessary for AJAX content loading -->
+<div id="content"> 
     <h2>Welcome, <?= htmlspecialchars($_SESSION['name']); ?>!</h2>
     <p>Email: <?= htmlspecialchars($_SESSION['email']); ?></p>
     <p><img src="<?= htmlspecialchars($_SESSION['picture']); ?>" alt="Profile Picture" width="150" height="150"></p>

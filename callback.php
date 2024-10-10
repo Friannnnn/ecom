@@ -25,3 +25,4 @@ if (isset($_GET['code'])) {
 } else {
     echo "No code received.";
 }
+?>

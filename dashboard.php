@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +11,11 @@
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box; 
         }
 
         body {
-            height: 100vh; 
+            background-color: gray;
+            height: 100vh;
             display: flex;
             flex-direction: column;
         }
@@ -30,8 +28,9 @@
             padding: 20px;
             background-color: #f8f9fa; 
         }
+
         .navbar {
-            background-color: #EDF0EF;
+            background-color: #EDF0EF; 
         }
 
         .navbar-bottom {
@@ -44,6 +43,7 @@
         }
 
         .nav-link {
+            color: black;
             height: 60px;
             display: flex;
             justify-content: center;
@@ -52,6 +52,7 @@
             font-size: 12px;
             text-align: center;
             transition: background-color 0.3s, color 0.3s; 
+            border-radius: 10px;
         }
 
         .nav-link i {
@@ -59,13 +60,14 @@
             margin-bottom: 3px;
         }
 
-        .nav-link:hover {
+        .nav-link:hover,
+        .nav-link.active {
             background-color: gray; 
             color: white; 
+            border-radius: 10px;
         }
 
         .navbar-nav {
-            display: flex;
             justify-content: space-evenly;
             width: 100%;
         }
@@ -86,6 +88,7 @@
             font-size: 24px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             z-index: 10;
+            transition: transform 0.2s; 
         }
 
         .cart-button i {
@@ -93,12 +96,16 @@
             color: #000;
         }
 
+        .cart-button:hover {
+            transform: translateX(-50%) scale(1.1); 
+        }
+
         @media (max-width: 576px) {
             .nav-link {
                 height: 50px;
                 font-size: 10px;
             }
-
+            
             .cart-button {
                 top: calc(100% - 90px);
                 width: 60px;
@@ -125,7 +132,7 @@
 
 <nav class="navbar navbar-bottom navbar-expand-lg">
     <div class="container-fluid">
-        <ul class="navbar-nav w-100">
+        <ul class="navbar nav w-100">
             <li class="nav-item">
                 <a class="nav-link" href="home.php" data-target="#content"> 
                     <i class="bi bi-house"></i> Home 
@@ -159,6 +166,8 @@
 
         $('.nav-link').on('click', function(e) {
             e.preventDefault();
+            $('.nav-link').removeClass('active');
+            $(this).addClass('active');
             var targetUrl = $(this).attr('href');
             $('#content').load(targetUrl);
         });
