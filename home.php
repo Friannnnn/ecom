@@ -1,60 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="assets/company_logo.jpg">
-    <title>Kaisermark Powertools</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        body {
-            background-color: gray;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+<?php 
+session_start();
+?>
 
-        .fade-up {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.8s forwards;
-        }
-
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .welcome-text {
-            text-align: center;
-            color: white;
-            font-size: 2em; /* Adjust for desktop */
-        }
-
-        @media (max-width: 576px) {
-            .welcome-text {
-                font-size: 1.5em; /* Adjust for mobile */
-            }
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <div class="fade-up welcome-text">
-        <h1>Welcome to Kaisermark Powertools</h1>
+<div id="content" class="text-center">
+    <div class="search-bar mt-3">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for Products..." aria-label="Search">
+            <button class="btn btn-primary" type="button" id="search-button">
+                <i class="bi bi-search"></i> 
+            </button>
+        </div>
     </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        $('.fade-up').css('animation-delay', '0.5s'); // Optional delay for effect
-    });
-</script>
 
-</body>
-</html>
+<style>
+    .search-bar {
+        width: 150%;
+        position: relative;
+        margin-top: 0;
+        right : 50px;
+        bottom: 250px;
+    }
+    
+    .bi-search {
+        font-size: 25px;
+    }
+
+    .btn-primary {
+        background-color: gray;
+        border-color: gray;
+        width: 100px;
+    }
+    
+    .btn-primary:hover {
+        border-color: transparent;
+        background-color: darkgray;
+    }
+
+    .form-control {
+        height: 60px;
+        font-size: 24px;
+    }
+
+    .btn {
+        height: 60px; 
+    }
+
+    @media (max-width: 576px) {
+        .search-bar {
+            width: 100%; /* Adjust for smaller devices */
+            right : 0px;
+        bottom: 0px;
+        }
+
+        .form-control {
+            height: 50px; /* Smaller input field for mobile */
+            font-size: 18px;
+        }
+
+        .btn {
+            height: 50px; /* Match button height on mobile */
+        }
+    }
+</style>
+
+<!-- Include Bootstrap's JavaScript bundle and icon library (if not already included) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
