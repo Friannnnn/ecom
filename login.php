@@ -12,8 +12,12 @@ $googleClient->addScope('email');
 $googleClient->addScope('profile');
 
 if (isset($_SESSION['name'])) {
+    
     header("location: profile.php");
+
 }
+
+
 
 ?>
 

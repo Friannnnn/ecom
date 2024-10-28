@@ -11,22 +11,31 @@
         * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
+        }
+
+        html, body {
+            height: 100%; /* Set height to 100% for html and body */
+            width: 100%; /* Set width to 100% for html and body */
         }
 
         body {
             background-color: gray;
-            height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
         .container {
-            flex-grow: 1;
+            flex-grow: 1; /* Allow container to grow and fill available space */
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
             background-color: #f8f9fa; 
+            width: 100%; /* Make sure the container takes full width */
+            max-width: 1300px; /* Set maximum width */
+            margin: 0 auto; /* Center the container */
+            overflow: auto; /* Allow scrolling if content overflows */
         }
 
         .navbar {
@@ -100,6 +109,14 @@
             transform: translateX(-50%) scale(1.1); 
         }
 
+        .loading {
+            display: none; /* Hidden by default */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
         @media (max-width: 576px) {
             .nav-link {
                 height: 50px;
@@ -123,11 +140,16 @@
 
 <div class="container">
     <div id="content">
+        <div class="loading">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
     </div>
 </div>
 
 <a href="#" class="cart-button">
-    <i class="bi bi-cart"></i>
+    <i class="bi bi-cart2"></i>
 </a>
 
 <nav class="navbar navbar-bottom navbar-expand-lg">
@@ -162,14 +184,19 @@
 
 <script>
     $(document).ready(function() {
-        $('#content').load('home.php');
+        $('#content').load('home.php', function() {
+            $('.loading').hide(); // Hide loading spinner after loading content
+        });
 
         $('.nav-link').on('click', function(e) {
             e.preventDefault();
             $('.nav-link').removeClass('active');
             $(this).addClass('active');
             var targetUrl = $(this).attr('href');
-            $('#content').load(targetUrl);
+            $('.loading').show(); // Show loading spinner
+            $('#content').load(targetUrl, function() {
+                $('.loading').hide(); // Hide loading spinner after loading content
+            });
         });
     });
 </script>
