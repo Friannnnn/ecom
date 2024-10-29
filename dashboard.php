@@ -11,12 +11,12 @@
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box; /* Include padding and border in element's total width and height */
+            box-sizing: border-box; 
         }
 
         html, body {
-            height: 100%; /* Set height to 100% for html and body */
-            width: 100%; /* Set width to 100% for html and body */
+            height: 100%; 
+            width: 100%; 
         }
 
         body {
@@ -26,16 +26,16 @@
         }
 
         .container {
-            flex-grow: 1; /* Allow container to grow and fill available space */
+            flex-grow: 1; 
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
             background-color: #f8f9fa; 
-            width: 100%; /* Make sure the container takes full width */
-            max-width: 1300px; /* Set maximum width */
-            margin: 0 auto; /* Center the container */
-            overflow: auto; /* Allow scrolling if content overflows */
+            width: 100%; 
+            max-width: 1300px; 
+            margin: 0 auto; 
+            overflow: auto; 
         }
 
         .navbar {
@@ -110,7 +110,7 @@
         }
 
         .loading {
-            display: none; /* Hidden by default */
+            display: none; 
             position: absolute;
             top: 50%;
             left: 50%;
@@ -185,7 +185,7 @@
 <script>
     $(document).ready(function() {
         $('#content').load('home.php', function() {
-            $('.loading').hide(); // Hide loading spinner after loading content
+            $('.loading').hide();
         });
 
         $('.nav-link').on('click', function(e) {
@@ -193,9 +193,9 @@
             $('.nav-link').removeClass('active');
             $(this).addClass('active');
             var targetUrl = $(this).attr('href');
-            $('.loading').show(); // Show loading spinner
+            $('.loading').show(); 
             $('#content').load(targetUrl, function() {
-                $('.loading').hide(); // Hide loading spinner after loading content
+                $('.loading').hide(); 
             });
         });
     });
