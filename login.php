@@ -27,8 +27,10 @@ if (isset($_SESSION['name'])) {
     <title>Login</title>
 </head>
 <body>
+
     <h1>Login</h1>
     <a href="<?php echo htmlspecialchars($googleClient->createAuthUrl()); ?>">Login with Google</a>
+    
 </body>
 </html>
 

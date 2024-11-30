@@ -51,6 +51,8 @@
     - Administrator <- Push Notification(Sale, Delivery)
 
 # Features to be added:
+    - set up acc for new users
+
     - the system can check and estimate the delivery time based on how far the customer is
 
     - customer can choose the branch on where to order for faster delivery
@@ -71,9 +73,14 @@
     )
 
     
+    
 
 # Categories of Product:
-    - hand grinder and stuffs
-
+    toyohama generator
+    fujihama generator
+    makita grinder
+    haina grinder
+    kawasaki grasscutter
+    
 
 
