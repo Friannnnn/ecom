@@ -7,6 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
    body {
     font-family: 'Inter', sans-serif;
@@ -252,13 +253,13 @@
   }
 
   .product-box {
-    display: flex;
-    gap: 15px; /* Added gap between the product cards */
-  }
-
+  display: flex;
+  gap: 15px;
+  justify-content: center; /* Centers the product cards */
+  flex-wrap: wrap; /* Allows wrapping of cards on smaller screens */
+}
   .product-card-main {
   width: 250px;
-  height: 320px;
   border: 1px solid #e4e4e4;
   border-radius: 20px;
   overflow: hidden;
@@ -266,6 +267,10 @@
   text-align: center;
   transition: box-shadow 0.2s ease;
   position: relative;
+  padding: 15px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
 #main-product {
@@ -275,6 +280,68 @@
   top: 10px;
   border-radius: 10px;
 }
+
+#shopnow-header {
+  font-family: 'Poppins', sans-serif; 
+  font-size: 45px; 
+  font-weight:500;
+  letter-spacing: 2px;
+}
+
+
+
+.product-info {
+  margin-top: 10px;
+}
+
+.product-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  margin-top: 8px;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.star-icon {
+  color: #f4c430;
+  font-size: 14px;
+}
+
+.rating-value {
+  font-size: 14px;
+  color: #555;
+  margin-left: 5px;
+}
+
+.dot {
+  font-size: 14px;
+  color: #aaa;
+  margin: 0 5px;
+}
+
+.items-sold {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.old-price {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #aaa;
+  text-decoration: line-through;
+}
+
+.new-price {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+}
+
 
   </style>
 </head>
@@ -323,20 +390,41 @@
   </div>
 
   <div class="todays-best-deals-container"> 
-    <div class="todays-best-deals-header">Today's Best Deals</div>
-    <div class="product-box">
-      <div class="product-card-main"> 
-        <img id="main-product" src="https://via.placeholder.com/200x200" alt="Product">
-      </div>
-      <div class="product-card-main">
-        <img id="main-product" src="https://via.placeholder.com/200x200" alt="Product">
-      </div>
-      <div class="product-card-main">
-        <img id="main-product" src="https://via.placeholder.com/200x200" alt="Product">
-      </div>
-      
+  <div class="todays-best-deals-header">Today's Best Deals</div>
+
+  <div class="product-box">
+    <div class="product-card-main">
+      <img id="main-product" src="./assets/prod_1.png" alt="Product">
+        <div class="product-info">
+          <div class="product-name">Hindi Ko Alam pero forsale</div>
+            <div class="product-rating">
+              <span class="star-icon">★</span>
+              <span class="rating-value">4.9</span>
+              <span class="dot">•</span>
+              <span class="items-sold">652 Items Sold</span>
+            </div>
+        <div class="old-price">₱ 69,696</div>
+        <div class="new-price">₱ I Miss You</div>
     </div>
   </div>
+
+    <div class="product-card-main"> 
+      <img id="main-product" src="./assets/prod_2.png" alt="Product">
+    </div>
+    <div class="product-card-main"> 
+      <img id="main-product" src="./assets/prod_3.png" alt="Product">
+    </div>
+    <div class="product-card-main"> 
+      <img id="main-product" src="./assets/prod_4.png" alt="Product">
+    </div>
+    
+  </div>
+</div>
+
+<div class="shopnow-build-later-container" style="text-align: center; margin: 40px 0;">
+  <h2 id="shopnow-header">Shop Now, Build Later</h2>
+  <p id="shopnow-subtext" style="font-size: 14px; color: #555;">We have a wide range of power tools and generators for you! Explore <br>our collection and find the tools you need to get the job done.</p>
+</div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script>
