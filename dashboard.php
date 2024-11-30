@@ -183,7 +183,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 <script>
-     $(document).ready(function() {
+    $(document).ready(function() {
         $('#content').load('home.php', function() {
             $('.loading').hide();
         });
@@ -197,7 +197,10 @@
             $('#content').load(targetUrl, function() {
                 $('.loading').hide(); 
             })
+
         });
+
+        
     });
 </script>
 
