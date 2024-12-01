@@ -1161,7 +1161,7 @@ session_start();
 
         <div class="col-md-3">
           <h5>Kaisermark</h5>
-          <p>Kaisermark Powertools, founded in IDK, specializes in premium power tools for professionals and enthusiasts nationwide.</p>
+          <p>Kaisermark powe, founded in IDK, specializes in premium power tools for professionals and enthusiasts nationwide.</p>
         </div>
 
         <div class="col-md-3">
