@@ -283,7 +283,7 @@ $googleClient->addScope('profile');
 
         #toggle-password {
     position: absolute;
-    top: 70%;
+    top: 45%;
     right: 12px;
     transform: translateY(-50%);
     cursor: pointer;
