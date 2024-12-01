@@ -226,6 +226,11 @@ $googleClient->addScope('profile');
             color: white;
         }
 
+        .google-btn a {
+        text-decoration: none;
+        color: inherit;
+        }
+
         .login-link {
             display: inline-block;
             text-align: center;
@@ -276,6 +281,13 @@ $googleClient->addScope('profile');
             color: #555;
         }
 
+        #toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
      
         
         @media (max-width: 576px) {
@@ -327,7 +339,7 @@ $googleClient->addScope('profile');
                     </form>
                     <center>
                         <div class="text-center login-link">
-                            <a href="register.php" class="login-link">Don't have an account? Register</a>
+                        Don't have an account? <a href="register.php" class="login-link"> Register</a>
                         </div>
                     </center>
                     <div class="divider">OR</div>
