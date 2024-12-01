@@ -704,19 +704,16 @@ session_start();
         <a href="profile.php" class="profile-link">
 
         <div class="profile">
-            <?php 
-              if (isset($_SESSION['name'])) {
-                echo '<img class="profile-photo" src="';
-                $_SESSION['picture'];
-                echo '" alt="Profile Photo">';
-              } else {
-                echo '<i class="bi bi-person profile-photo" style="font-size: 25px;"></i>';
-              }
-              
-            ?>
-                        
-
-        </div>
+  <?php 
+    if (isset($_SESSION['name'])) {
+      // If the user is logged in and has a profile picture
+      echo '<img class="profile-photo" src="' . htmlspecialchars($_SESSION['picture']) . '" alt="Profile Photo">';
+    } else {
+      // If no user is logged in, show the default profile icon
+      echo '<i class="bi bi-person profile-photo" style="font-size: 25px;"></i>';
+    }
+  ?>
+</div>
 
         </a>
       </div>
