@@ -744,7 +744,7 @@ session_start();
       <div class="product-card-main">
         <img id="main-product" src="assets/prod_1.jpg" alt="Product">
         <div class="product-info">
-          <div class="product-name">Pang tustos lang po</div>
+          <div class="product-name">Pang tustos lang posadasdasdsadasd</div>
           <div class="product-rating">
             <span class="star-icon">★</span>
             <span class="rating-value">4.9</span>
