@@ -9,6 +9,8 @@ $googleClient->setClientSecret('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');
 $googleClient->setRedirectUri('http://localhost/ecom/callback.php');
 $googleClient->addScope('email');
 $googleClient->addScope('profile');
+
+
 ?>
 
 <!DOCTYPE html>
@@ -23,28 +25,6 @@ $googleClient->addScope('profile');
         body {
             font-family: Arial, sans-serif;
             overflow: hidden;
-        }
-
-        /* Add fade-up animation */
-        .fade-up {
-          animation: fadeUp 1s ease-in-out;
-        }
-
-        @keyframes fadeUp {
-          0% {
-            opacity: 0;
-            transform: translateY(20px); /* Start slightly below */
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0); /* End at normal position */
-          }
-        }
-
-        /* Google Button style changes */
-        .google-btn a {
-          color: inherit; /* Inherit color from the button */
-          text-decoration: none; /* Remove text decoration */
         }
 
         .navbar {
@@ -125,6 +105,55 @@ $googleClient->addScope('profile');
         .btn-create:hover, .btn-outline-secondary:hover, .google-btn:hover {
             color: rgb(255,255,255);
             transition: 0.2s 0.1s;
+        }
+
+        .btn-2 {
+            position: relative;
+            border: 1px solid rgb(28, 31, 30);
+            display: inline-block;
+            width: 300px;
+            height: 60px;
+            background-color: transparent;
+            cursor: pointer;
+            min-width: 100%;
+        }
+
+        .btn-2 span {
+            position: relative;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 20px;
+            transition: 0.3s;
+        }
+
+        .btn-3 {
+            position: relative;
+            display: inline-block;
+            width: 200px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            min-width: 50%;
+        }
+
+        .btn-3 span {
+            position: relative;
+            display: inline-block;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 20px;
+            transition: 0.3s;
         }
 
         .divider {
@@ -275,7 +304,7 @@ $googleClient->addScope('profile');
                 </a>
             </div>
         </nav>
-        <div class="container form-container fade-up">
+        <div class="container form-container">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <form>
