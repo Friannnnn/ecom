@@ -824,7 +824,7 @@ session_start();
       <ul class="dropdown-menu">
         <li><a class="dropdown-item" href="#">Atoyot</a></li>
         <li><a class="dropdown-item" href="#">Nassin</a></li>
-        <li><a class="dropdown-item" href="#">Nike Free</a></li>
+        <li><a class="dropdown-item" href="#">Adnoh</a></li>
       </ul>
     </div>
 
@@ -838,9 +838,9 @@ session_start();
         <i class="bi bi-chevron-down"></i>
       </button>
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">$0 - $50</a></li>
-        <li><a class="dropdown-item" href="#">$50 - $100</a></li>
-        <li><a class="dropdown-item" href="#">$100 - $200</a></li>
+        <li><a class="dropdown-item" href="#">0 - 50</a></li>
+        <li><a class="dropdown-item" href="#">50 - 100</a></li>
+        <li><a class="dropdown-item" href="#">100 - 200</a></li>
       </ul>
     </div>
 
@@ -855,9 +855,9 @@ session_start();
         <i class="bi bi-chevron-down"></i>
       </button>
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Running</a></li>
-        <li><a class="dropdown-item" href="#">Casual</a></li>
-        <li><a class="dropdown-item" href="#">Sports</a></li>
+        <li><a class="dropdown-item" href="#">Outdoor</a></li>
+        <li><a class="dropdown-item" href="#">Indoor</a></li>
+        <li><a class="dropdown-item" href="#">Backdoor</a></li>
       </ul>
     </div>
 
