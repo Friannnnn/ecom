@@ -690,7 +690,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
     <div class="navbar-container">
       <div class="brand-search-group">
         <a class="navbar-brand" href="#">
-          <img src="./assets/logo_mini.png" alt="Logo" style="height: 50px; width: 50px; border-radius: 50%;">
+          <img src="assets/logo_mini.png" alt="Logo" style="height: 50px; width: 50px; border-radius: 50%;">
         </a>
         <div class="input-container">
           <input class="form-control rounded-pill" type="search" placeholder='try "Generator"...' aria-label="Search">
@@ -727,11 +727,11 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
 
   <div class="arrival-discount-container">
     <div class="product-card">
-      <img src="./assets/arrival_prod.png" alt="Product Image">
+      <img src="assets/arrival_prod.png" alt="Product Image">
       <a href="#" class="view-button">View Product</a>
     </div>
     <div class="discount-card">
-      <img src="./assets/disc_card.png" alt="Discount Image">
+      <img src="assets/disc_card.png" alt="Discount Image">
       <a href="#" class="view-button">Event Details</a>
     </div>
   </div>
@@ -741,7 +741,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
 
     <div class="product-box">
       <div class="product-card-main">
-        <img id="main-product" src="./assets/prod_1.png" alt="Product">
+        <img id="main-product" src="assets/prod_1.png" alt="Product">
         <div class="product-info">
           <div class="product-name">Pang tustos lang po</div>
           <div class="product-rating">
@@ -756,7 +756,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
       </div>
 
       <div class="product-card-main">
-        <img id="main-product" src="./assets/prod_2.png" alt="Product">
+        <img id="main-product" src="assets/prod_2.png" alt="Product">
         <div class="product-info">
           <div class="product-name">2nd Hand but Bnew</div>
           <div class="product-rating">
@@ -771,7 +771,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
       </div>
 
       <div class="product-card-main">
-        <img id="main-product" src="./assets/prod_3.png" alt="Product">
+        <img id="main-product" src="assets/prod_3.png" alt="Product">
         <div class="product-info">
           <div class="product-name">Gumagana pero joke lng</div>
           <div class="product-rating">
@@ -786,7 +786,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
       </div>
 
       <div class="product-card-main">
-        <img id="main-product" src="./assets/prod_4.png" alt="Product">
+        <img id="main-product" src="assets/prod_4.png" alt="Product">
         <div class="product-info">
           <div class="product-name">Grinder free rcb manibela</div>
           <div class="product-rating">
@@ -883,7 +883,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
 <div class="product-list-main">
   <div class="product-box">
     <div class="product-card-main">
-      <img id="main-product" src="./assets/prod_1.png" alt="Product">
+      <img id="main-product" src="assets/prod_1.png" alt="Product">
       <div class="product-info">
         <div class="product-name">Pang tustos lang po</div>
         <div class="product-rating">
@@ -898,7 +898,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
     </div>
 
     <div class="product-card-main">
-      <img id="main-product" src="./assets/prod_2.png" alt="Product">
+      <img id="main-product" src="assets/prod_2.png" alt="Product">
       <div class="product-info">
         <div class="product-name">2nd Hand but Bnew</div>
         <div class="product-rating">
@@ -913,7 +913,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
     </div>
 
     <div class="product-card-main">
-      <img id="main-product" src="./assets/prod_3.png" alt="Product">
+      <img id="main-product" src="assets/prod_3.png" alt="Product">
       <div class="product-info">
         <div class="product-name">Gumagana pero joke lng</div>
         <div class="product-rating">
@@ -928,7 +928,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
     </div>
 
     <div class="product-card-main">
-      <img id="main-product" src="./assets/prod_4.png" alt="Product">
+      <img id="main-product" src="assets/prod_4.png" alt="Product">
       <div class="product-info">
         <div class="product-name">Grinder free rcb manibela</div>
         <div class="product-rating">
@@ -942,7 +942,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
       </div>
     </div>
     <div class="product-card-main">
-      <img id="main-product" src="./assets/prod_1.png" alt="Product">
+      <img id="main-product" src="assets/prod_1.png" alt="Product">
       <div class="product-info">
         <div class="product-name">Pang tustos lang po</div>
         <div class="product-rating">
@@ -957,7 +957,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
     </div>
 
     <div class="product-card-main">
-      <img id="main-product" src="./assets/prod_2.png" alt="Product">
+      <img id="main-product" src="assets/prod_2.png" alt="Product">
       <div class="product-info">
         <div class="product-name">2nd Hand but Bnew</div>
         <div class="product-rating">
@@ -972,7 +972,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
     </div>
 
     <div class="product-card-main">
-      <img id="main-product" src="./assets/prod_3.png" alt="Product">
+      <img id="main-product" src="assets/prod_3.png" alt="Product">
       <div class="product-info">
         <div class="product-name">Gumagana pero joke lng</div>
         <div class="product-rating">
@@ -987,7 +987,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
     </div>
 
     <div class="product-card-main">
-      <img id="main-product" src="./assets/prod_4.png" alt="Product">
+      <img id="main-product" src="assets/prod_4.png" alt="Product">
       <div class="product-info">
         <div class="product-name">Grinder free rcb manibela</div>
         <div class="product-rating">
@@ -1001,7 +1001,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
       </div>
     </div>
     <div class="product-card-main">
-      <img id="main-product" src="./assets/prod_1.png" alt="Product">
+      <img id="main-product" src="assets/prod_1.png" alt="Product">
       <div class="product-info">
         <div class="product-name">Pang tustos lang po</div>
         <div class="product-rating">
@@ -1016,7 +1016,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
     </div>
 
     <div class="product-card-main">
-      <img id="main-product" src="./assets/prod_2.png" alt="Product">
+      <img id="main-product" src="assets/prod_2.png" alt="Product">
       <div class="product-info">
         <div class="product-name">2nd Hand but Bnew</div>
         <div class="product-rating">
@@ -1031,7 +1031,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
     </div>
 
     <div class="product-card-main">
-      <img id="main-product" src="./assets/prod_3.png" alt="Product">
+      <img id="main-product" src="assets/prod_3.png" alt="Product">
       <div class="product-info">
         <div class="product-name">Gumagana pero joke lng</div>
         <div class="product-rating">
@@ -1060,7 +1060,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
   <div class="brand-card">
     <div class="brand-header">
       <div class="brand-logo">
-        <img src="./assets/brand_logo(dewalt).png" alt="Dewalt">
+        <img src="assets/brand_logo(dewalt).png" alt="Dewalt">
       </div>
       <div class="brand-info">
         <h3 class="brand-name">DeWalt 
@@ -1077,17 +1077,17 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
       <button class="visit-btn">Visit</button>
     </div>
     <div class="brand-products">
-    <div class="product-placeholder"><img class="product-placeholder" src="./assets/dewalt/1.png"></div>
-    <div class="product-placeholder"><img class="product-placeholder" src="./assets/dewalt/2.png"></div>
-    <div class="product-placeholder"><img class="product-placeholder" src="./assets/dewalt/3.png"></div>
-    <div class="product-placeholder"><img class="product-placeholder" src="./assets/dewalt/4.png"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/1.png"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/2.png"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/3.png"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/4.png"></div>
 
     </div>
   </div>
   <div class="brand-card">
     <div class="brand-header">
       <div class="brand-logo">
-        <img src="./assets/brand_logo(kawasaki).png" alt="Kawasaki">
+        <img src="assets/brand_logo(kawasaki).png" alt="Kawasaki">
       </div>
       <div class="brand-info">
         <h3 class="brand-name">Kawasaki 
@@ -1113,7 +1113,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
   <div class="brand-card">
     <div class="brand-header">
       <div class="brand-logo">
-        <img src="./assets/brand_logo(makita).png" alt="Makita">
+        <img src="assets/brand_logo(makita).png" alt="Makita">
       </div>
       <div class="brand-info">
         <h3 class="brand-name">Makita
@@ -1147,7 +1147,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
     <a href="#" class="landscape-link">
       <div class="landscape-placeholder">
 
-        <img src="./assets/more_aboutus.png" alt="Landscape" class="landscape-image">
+        <img src="assets/more_aboutus.png" alt="Landscape" class="landscape-image">
         <button class="landscape-btn">More About Us</button>
       </div>
     </a>
