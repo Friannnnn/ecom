@@ -817,13 +817,13 @@ session_start();
         data-bs-toggle="dropdown" 
         aria-expanded="false"
       >
-        <img src="https://via.placeholder.com/20" alt="Nike Logo" class="icon-img">
-        Nike
+        <img src="https://via.placeholder.com/20" alt="Brand Logo" class="icon-img">
+        Brand
         <i class="bi bi-chevron-down"></i>
       </button>
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Nike Air</a></li>
-        <li><a class="dropdown-item" href="#">Nike Zoom</a></li>
+        <li><a class="dropdown-item" href="#">Atoyot</a></li>
+        <li><a class="dropdown-item" href="#">Nassin</a></li>
         <li><a class="dropdown-item" href="#">Nike Free</a></li>
       </ul>
     </div>
