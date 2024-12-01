@@ -1077,10 +1077,10 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
       <button class="visit-btn">Visit</button>
     </div>
     <div class="brand-products">
-    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/1.jpg"></div>
-    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/2.jpg"></div>
-    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/3.jpg"></div>
-    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/4.jpg"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/1.png"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/2.png"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/3.png"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/4.png"></div>
 
     </div>
   </div>
