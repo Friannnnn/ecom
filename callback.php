@@ -5,8 +5,9 @@ require_once 'vendor/autoload.php';
 session_start();
 
 $client = new Google_Client();
-$client->setClientId('change link nalang sa production');
-$client->setClientSecret('change link nalang sa production'); 
+$client->setClientId('320054654260-fcptfeujln15q5biepe21obl7q2bkvr3.apps.googleusercontent.com');
+$client->setClientSecret('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');
+
 $client->setRedirectUri('http://localhost/ecom/callback.php'); 
 
 if (isset($_GET['code'])) {
@@ -20,7 +21,7 @@ if (isset($_GET['code'])) {
     $_SESSION['name'] = $userInfo->name;
     $_SESSION['picture'] = $userInfo->picture;
 
-    header('Location: dashboard.php');
+    header('Location: discover.php');
     exit();
 } else {
     echo "No code received.";
