@@ -10,11 +10,6 @@ $googleClient->setRedirectUri('http://localhost/ecom/callback.php');
 $googleClient->addScope('email');
 $googleClient->addScope('profile');
 
-if (isset($_SESSION['name'])) {
-    
-    header("location: profile.php");
-
-}
 
 ?>
 

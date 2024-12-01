@@ -1,11 +1,5 @@
 <?php 
 session_start();
-
-$isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true;
-
-$userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'] : '';
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -710,14 +704,18 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
         <a href="profile.php" class="profile-link">
 
         <div class="profile">
-          <?php if ($isLoggedIn && !empty($userProfileImage)): ?>
-            <!-- If the user is logged in and has a profile image, show the profile photo -->
-            <img class="profile-photo" src="<?php echo $userProfileImage; ?>" alt="Profile Photo">
-          <?php else: ?>
-            <!-- If the user is not logged in or doesn't have a profile image, show the default icon -->
-            <i class="bi bi-person profile-photo" style="font-size: 25px;"></i>
-          <?php endif; ?>
-          <span class="profile-name"><?php echo $isLoggedIn ? $_SESSION['user_name'] : 'Profile'; ?></span>
+            <?php 
+              if (isset($_SESSION['name'])) {
+                echo '<img class="profile-photo" src="';
+                $_SESSION['picture'];
+                echo '" alt="Profile Photo">';
+              } else {
+                echo '<i class="bi bi-person profile-photo" style="font-size: 25px;"></i>';
+              }
+              
+            ?>
+                        
+
         </div>
 
         </a>
