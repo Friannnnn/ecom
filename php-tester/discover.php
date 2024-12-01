@@ -800,7 +800,6 @@
       </ul>
     </div>
 
-    <!-- Price Filter -->
     <div class="dropdown">
       <button
         class="btn btn-light rounded-pill d-flex align-items-center px-4 py-2 gray dropdown-toggle"
@@ -817,7 +816,6 @@
       </ul>
     </div>
 
-    <!-- Category Filter -->
     <div class="dropdown">
       <button
         class="btn btn-light rounded-pill d-flex align-items-center px-4 py-2 gray dropdown-toggle"
@@ -835,12 +833,8 @@
       </ul>
     </div>
 
-
-
-    <!-- Divider -->
     <div class="divider"></div>
 
-    <!-- More Filter -->
     <div class="dropdown">
       <button
         class="btn btn-light rounded-pill d-flex align-items-center px-4 py-2 dropdown-toggle"
