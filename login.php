@@ -338,10 +338,11 @@ $googleClient->addScope('profile');
                         </button>
                     </form>
                     <center>
-                        <div class="text-center login-link">
-                        Don't have an account? <a href="register.php" class="login-link"> Register</a>
-                        </div>
-                    </center>
+    <div class="text-center">
+        <span>Don't have an account?</span>
+        <a href="register.php" class="login-link"> Register</a>
+    </div>
+</center>
                     <div class="divider">OR</div>
                     <center>
                         <button type="button" class="btn btn-outline-dark google-btn btn-3 hover-slide-up">
