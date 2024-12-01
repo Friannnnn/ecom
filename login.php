@@ -186,6 +186,7 @@ $googleClient->addScope('profile');
             border: 1px solid rgb(28, 31, 30);
             overflow: hidden;
             cursor: pointer;
+            text-decoration: none;
             transition: color 0.3s ease;
         }
 
@@ -205,6 +206,7 @@ $googleClient->addScope('profile');
         }
 
         .google-btn.btn-3::before {
+
             content: "";
             position: absolute;
             top: 100%;
@@ -274,9 +276,8 @@ $googleClient->addScope('profile');
             color: #555;
         }
 
-        .cont-google {
-            text-decoration: none;
-        }
+     
+        
         @media (max-width: 576px) {
             body {
                 overflow: visible;
@@ -332,11 +333,11 @@ $googleClient->addScope('profile');
                     <div class="divider">OR</div>
                     <center>
                         <button type="button" class="btn btn-outline-dark google-btn btn-3 hover-slide-up">
+                            <a class="cont-google" href="<?php echo htmlspecialchars($googleClient->createAuthUrl()); ?>">
                             <span class="cont-google">
-                                <a href="<?php echo htmlspecialchars($googleClient->createAuthUrl()); ?>">
                                 <i class="bi bi-google"></i>Continue with Google
-                                </a>
                             </span>
+                        </a>
                         </button>
                     </center>
                 </div>
