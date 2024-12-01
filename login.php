@@ -274,6 +274,9 @@ $googleClient->addScope('profile');
             color: #555;
         }
 
+        .cont-google {
+            text-decoration: none;
+        }
         @media (max-width: 576px) {
             body {
                 overflow: visible;
@@ -329,7 +332,7 @@ $googleClient->addScope('profile');
                     <div class="divider">OR</div>
                     <center>
                         <button type="button" class="btn btn-outline-dark google-btn btn-3 hover-slide-up">
-                            <span>
+                            <span class="cont-google">
                                 <a href="<?php echo htmlspecialchars($googleClient->createAuthUrl()); ?>">
                                 <i class="bi bi-google"></i>Continue with Google
                                 </a>
