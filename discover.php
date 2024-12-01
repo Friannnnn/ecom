@@ -707,7 +707,7 @@ $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'
         </button>
         <span class="separator">|</span>
 
-        <a href="account.php" class="profile-link">
+        <a href="profile.php" class="profile-link">
 
         <div class="profile">
           <?php if ($isLoggedIn && !empty($userProfileImage)): ?>
