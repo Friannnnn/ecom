@@ -1,3 +1,13 @@
+<?php 
+session_start();
+
+$isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true;
+
+$userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'] : '';
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -143,6 +153,12 @@
     border-radius: 50%;
     margin-left: 15px;
   }
+
+  .profile-link {
+  display: block; /* Make the anchor tag occupy the full width of the parent div */
+  text-decoration: none; /* Remove the underline from the link */
+  color: inherit; /* Ensure the text color remains the same */
+}
 
   .separator {
     margin-left: 8px;
@@ -558,6 +574,7 @@
 }
 
 .brand-products {
+  
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
@@ -567,7 +584,7 @@
   width: 100%;
   aspect-ratio: 1;
   background-color: #eaeaea;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 
@@ -690,10 +707,21 @@
           <span>3 items</span>
         </button>
         <span class="separator">|</span>
+
+        <a href="account.php" class="profile-link">
+
         <div class="profile">
-          <img class="profile-photo" src="https://via.placeholder.com/35" alt="Profile Photo">
-          <span class="profile-name">John Doe</span>
+          <?php if ($isLoggedIn && !empty($userProfileImage)): ?>
+            <!-- If the user is logged in and has a profile image, show the profile photo -->
+            <img class="profile-photo" src="<?php echo $userProfileImage; ?>" alt="Profile Photo">
+          <?php else: ?>
+            <!-- If the user is not logged in or doesn't have a profile image, show the default icon -->
+            <i class="bi bi-person profile-photo" style="font-size: 25px;"></i>
+          <?php endif; ?>
+          <span class="profile-name"><?php echo $isLoggedIn ? $_SESSION['user_name'] : 'Profile'; ?></span>
         </div>
+
+        </a>
       </div>
     </div>
   </nav>
@@ -1032,7 +1060,9 @@
 <div class="brandcard-container">
   <div class="brand-card">
     <div class="brand-header">
-      <div class="brand-logo placeholder"></div>
+      <div class="brand-logo">
+        <img src="./assets/brand_logo(dewalt).png" alt="Dewalt">
+      </div>
       <div class="brand-info">
         <h3 class="brand-name">DeWalt 
           <span class="verified-badge">
@@ -1048,15 +1078,18 @@
       <button class="visit-btn">Visit</button>
     </div>
     <div class="brand-products">
-      <div class="product-placeholder"></div>
-      <div class="product-placeholder"></div>
-      <div class="product-placeholder"></div>
-      <div class="product-placeholder"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="./assets/dewalt/1.png"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="./assets/dewalt/2.png"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="./assets/dewalt/3.png"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="./assets/dewalt/4.png"></div>
+
     </div>
   </div>
   <div class="brand-card">
     <div class="brand-header">
-      <div class="brand-logo placeholder"></div>
+      <div class="brand-logo">
+        <img src="./assets/brand_logo(kawasaki).png" alt="Kawasaki">
+      </div>
       <div class="brand-info">
         <h3 class="brand-name">Kawasaki 
           <span class="verified-badge">
@@ -1080,9 +1113,11 @@
   </div>
   <div class="brand-card">
     <div class="brand-header">
-      <div class="brand-logo placeholder"></div>
+      <div class="brand-logo">
+        <img src="./assets/brand_logo(makita).png" alt="Makita">
+      </div>
       <div class="brand-info">
-        <h3 class="brand-name">Toyohama 
+        <h3 class="brand-name">Makita
           <span class="verified-badge">
             <i class="bi bi-check-circle-fill"></i>
           </span>
