@@ -255,8 +255,8 @@
   .product-box {
   display: flex;
   gap: 15px;
-  justify-content: center; /* Centers the product cards */
-  flex-wrap: wrap; /* Allows wrapping of cards on smaller screens */
+  justify-content: center; 
+  flex-wrap: wrap; 
   }
     .product-card-main {
     font-family: "Inter",  sans-serif;
@@ -299,10 +299,10 @@
     font-size: 16px;
     font-weight: 600;
     color: #000;
-    white-space: nowrap; /* Prevent the text from wrapping */
-    overflow: hidden; /* Hide text that overflows */
-    text-overflow: ellipsis; /* Show "..." when text overflows */
-    width: 100%; /* Ensure it takes up full available width */
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    width: 100%;
   }
 
   .product-rating {
@@ -347,7 +347,7 @@
     color: #000;
   }
 
-  /* Styling for Product List Main */
+
 .product-list-main {
   padding: 20px 30px;
 }
@@ -358,21 +358,19 @@
   background-color: white;
   max-width: 900px;
   margin: 0 auto;
-  padding: 10px 0; /* Top and bottom padding for compact height */
+  padding: 10px 0; 
 }
 
-/* Adjust spacing between text and down arrow icons */
+
 .custom-filter-container .btn i.bi-chevron-down {
   margin-left: 40px;
 }
 
-/* Divider line styling */
 .custom-filter-container .divider {
   border-left: 1px solid #ddd;
   height: 40px;
 }
 
-/* Styling for icon images inside buttons */
 .custom-filter-container .icon-img {
   height: 20px;
   margin-right: 10px;
@@ -389,8 +387,8 @@
 }
 
 .view-more-container {
-  text-align: center; /* Center the button */
-  margin-top: 20px; /* Add spacing above the button */
+  text-align: center;
+  margin-top: 20px; 
 }
 
 .view-more-button {
@@ -411,16 +409,200 @@
   border: 1px solid #ddd;
 }
 
+.brandcard-container {
+  display: flex;
+  gap: 20px;
+  margin: 20px auto;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .brand-card {
-  position: relative;
-  background-color: #f4f4f4;
+  width: 320px;
+  border: 1px solid #eaeaea;
   border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  position: relative;
+}
+
+.brand-header {
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.brand-logo.placeholder {
+  width: 60px;
+  height: 60px;
+  background-color: #eaeaea;
+  border-radius: 5px; 
+}
+
+.brand-info {
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.brand-info h3 {
+  font-size: 16px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.verified-badge {
+  margin-left: 8px;
+  color: #1da1f2;
+  font-size: 18px;
+}
+
+.brand-info p {
+  margin: 5px 0 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.brand-name {
+  font-family: "Inter";
+  font-weight: bold;
+}
+
+.rating-star {
+  color: #f5c518; 
+  margin-right: 4px;
 }
 
 
-  </style>
+.visit-btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: black;
+  background-color: white;
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  margin-left: auto; 
+  height: fit-content;
+}
+
+.visit-btn:hover {
+  background-color: black;
+  color: white;
+}
+
+.brand-products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.product-placeholder {
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: #eaeaea;
+  border-radius: 5px;
+}
+
+
+.brand-landscape {
+  margin: 20px 40px;
+}
+
+.landscape-container {
+  width: 100%;
+  padding: 20px 0;
+}
+
+.landscape-link {
+  display: block;
+  text-decoration: none;
+}
+
+.landscape-placeholder {
+  width: 100%;
+  height: 400px; 
+  position: relative;
+}
+
+.landscape-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  border-radius: 20px;
+}
+
+/* Button styling */
+.landscape-btn {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: black;
+  background-color: white;
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.landscape-btn:hover {
+  background-color: black;
+  color: white;
+}
+
+.footer {
+      background-color: #121212;
+      color: #ffffff;
+      padding: 40px 20px;
+    }
+    .footer h5 {
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+    .footer p {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .footer .subscribe-box input {
+      border: none;
+      border-radius: 0;
+      padding: 10px;
+      width: 100%;
+      max-width: 300px;
+    }
+    .footer .subscribe-box button {
+      border: none;
+      background-color: #ffffff;
+      color: #000;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    .footer .links ul {
+      list-style: none;
+      padding: 0;
+    }
+    .footer .links ul li {
+      margin-bottom: 10px;
+    }
+    .footer .links ul li a {
+      text-decoration: none;
+      color: #ffffff;
+    }
+    .footer .links ul li a:hover {
+      text-decoration: underline;
+    }
+
+    </style>
 </head>
 <body>
   <div class="top-header">
@@ -564,7 +746,6 @@
   </div>
 </div>
 
-<!-- Product List Main Section -->
 <div class="product-list-main">
   <div class="product-box">
     <div class="product-card-main">
@@ -741,26 +922,151 @@
   <p id="shopnow-subtext" style="font-size: 14px; color: #7f7f7f;">Work together with the high quality and famous brand around the world.</p>
 </div>
 
-<div class="brand-card">
-  <div class="brand-header">
-    <img src="assets/new_balance_logo.png" alt="Brand Logo" class="brand-logo">
-    <div class="brand-info">
-      <h4 class="brand-name">New Balance <i class="bi bi-check-circle-fill verified-icon"></i></h4>
-      <div class="brand-meta">
-        <span class="brand-rating"><i class="bi bi-star-fill"></i> 4.9</span>
-        <span class="review-count">(10219 Reviews)</span>
+<div class="brandcard-container">
+  <div class="brand-card">
+    <div class="brand-header">
+      <div class="brand-logo placeholder"></div>
+      <div class="brand-info">
+        <h3 class="brand-name">DeWalt 
+          <span class="verified-badge">
+            <i class="bi bi-check-circle-fill"></i>
+          </span>
+        </h3>
+        <p>
+          <i class="bi bi-star-fill rating-star"></i>
+          <span class="rating">4.9</span> (10219 Reviews)
+        </p>
+        <p class="followers">7.2M Followers</p>
       </div>
-      <span class="follower-count">7.2M Followers</span>
+      <button class="visit-btn">Visit</button>
     </div>
-    <button class="visit-button">Visit</button>
+    <div class="brand-products">
+      <div class="product-placeholder"></div>
+      <div class="product-placeholder"></div>
+      <div class="product-placeholder"></div>
+      <div class="product-placeholder"></div>
+    </div>
   </div>
-  <div class="brand-products">
-    <img src="assets/shoe1.png" alt="Shoe 1" class="product-img">
-    <img src="assets/shoe2.png" alt="Shoe 2" class="product-img">
-    <img src="assets/shoe3.png" alt="Shoe 3" class="product-img">
-    <img src="assets/shoe4.png" alt="Shoe 4" class="product-img">
+  <div class="brand-card">
+    <div class="brand-header">
+      <div class="brand-logo placeholder"></div>
+      <div class="brand-info">
+        <h3 class="brand-name">Kawasaki 
+          <span class="verified-badge">
+            <i class="bi bi-check-circle-fill"></i>
+          </span>
+        </h3>
+        <p>
+          <i class="bi bi-star-fill rating-star"></i>
+          <span class="rating">4.9</span> (10219 Reviews)
+        </p>
+        <p class="followers">7.2M Followers</p>
+      </div>
+      <button class="visit-btn">Visit</button>
+    </div>
+    <div class="brand-products">
+      <div class="product-placeholder"></div>
+      <div class="product-placeholder"></div>
+      <div class="product-placeholder"></div>
+      <div class="product-placeholder"></div>
+    </div>
+  </div>
+  <div class="brand-card">
+    <div class="brand-header">
+      <div class="brand-logo placeholder"></div>
+      <div class="brand-info">
+        <h3 class="brand-name">Toyohama 
+          <span class="verified-badge">
+            <i class="bi bi-check-circle-fill"></i>
+          </span>
+        </h3>
+        <p>
+          <i class="bi bi-star-fill rating-star"></i>
+          <span class="rating">4.9</span> (10219 Reviews)
+        </p>
+        <p class="followers">7.2M Followers</p>
+      </div>
+      <button class="visit-btn">Visit</button>
+    </div>
+    <div class="brand-products">
+      <div class="product-placeholder"></div>
+      <div class="product-placeholder"></div>
+      <div class="product-placeholder"></div>
+      <div class="product-placeholder"></div>
+    </div>
   </div>
 </div>
+<br>
+<div class="view-more-container">
+<a href="#" class="view-more-button">View More</a>
+</div>
+
+<div class="brand-landscape">
+  <div class="landscape-container">
+    <a href="#" class="landscape-link">
+      <div class="landscape-placeholder">
+
+        <img src="./assets/more_aboutus.png" alt="Landscape" class="landscape-image">
+        <button class="landscape-btn">More About Us</button>
+      </div>
+    </a>
+  </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-3">
+          <h5>Kaisermark</h5>
+          <p>Kaisermark Powertools, founded in IDK, specializes in premium power tools for professionals and enthusiasts nationwide.</p>
+        </div>
+
+        <div class="col-md-3">
+          <h5>Don’t Wanna Miss Our Offers?</h5>
+          <div class="subscribe-box">
+            <input type="email" placeholder="Your email@mail.com">
+            <button>Subscribe</button>
+          </div>
+        </div>
+        <!-- Links -->
+        <div class="col-md-2 links">
+          <h5>Products</h5>
+          <ul>
+            <li><a href="#">to be added</a></li>
+            <li><a href="#">to be added</a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 links">
+          <h5>Collections</h5>
+          <ul>
+            <li><a href="#">to be added</a></li>
+            <li><a href="#">to be added</a></li>
+            <li><a href="#">to be added</a></li>
+            <li><a href="#">to be added</a></li>
+            <li><a href="#">to be added</a></li>
+            <li><a href="#">to be added</a></li>
+            
+          </ul>
+        </div>
+        <div class="col-md-2 links">
+          <h5>Legal</h5>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms and Conditions</a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 links">
+          <h5>Support</h5>
+          <ul>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Give feedback</a></li>
+            <li><a href="#">Help center</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script>
