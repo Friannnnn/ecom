@@ -5,8 +5,8 @@ require_once 'vendor/autoload.php';
 session_start();
 
 $googleClient = new Google_Client();
-$googleClient->setClientId('change link nalang sa production');
-$googleClient->setClientSecret('change link nalang sa production');
+$googleClient->setClientId('320054654260-fcptfeujln15q5biepe21obl7q2bkvr3.apps.googleusercontent.com');
+$googleClient->setClientSecret('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');
 $googleClient->setRedirectUri('http://localhost/ecom/callback.php');
 $googleClient->addScope('email');
 $googleClient->addScope('profile');
