@@ -28,9 +28,11 @@ $googleClient->addScope('profile');
         }
 
         .navbar {
-            padding: 20px 0;
-            border-bottom: 1px solid #eaeaea;
-        }
+    height: 80px; /* Adjust this value to match the original height */
+    display: flex;
+    align-items: center;
+    padding: 0; /* Remove padding if unnecessary */
+}
 
         .navbar-brand {
             font-size: 24px;
@@ -310,16 +312,11 @@ $googleClient->addScope('profile');
 
 <body>
     <div class="container-fluid">
-        <nav class="navbar navbar-light bg-white position-relative">
-            <div class="container d-flex justify-content-end align-items-center">
-                <a class="navbar-brand" href="#">KAISERMARK POWERTOOLS</a>
-                <a href="#" class="nav-link">Search</a>
-                <a href="#" class="nav-link">Account</a>
-                <a href="#" class="nav-link icon-spacing">
-                    <i class="bi bi-bell"></i>
-                </a>
-            </div>
-        </nav>
+            <nav class="navbar navbar-light bg-white position-relative">
+                <div class="container d-flex justify-content-center align-items-center">
+                    <a class="navbar-brand" href="#">KAISERMARK POWERTOOLS</a>
+                </div>
+            </nav>
         <div class="container form-container">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
