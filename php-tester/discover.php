@@ -352,18 +352,70 @@
   padding: 20px 30px;
 }
 
-  .custom-filter-container {
+.custom-filter-container {
   border: 1px solid #ddd;
   border-radius: 100px;
   background-color: white;
   max-width: 900px;
   margin: 0 auto;
-  padding: 10px 0; 
+  padding: 10px 0;
 }
 
+.custom-filter-container {
+  border: 1px solid #ddd;
+  border-radius: 100px;
+  background-color: white;
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+
+.custom-filter-container .d-flex {
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.custom-filter-container .btn-light {
+  font-size: 14px;
+  background-color: #f5f5f5;
+  position: relative; /* Ensure the chevron is correctly placed */
+}
+
+.custom-filter-container .dropdown-toggle::after {
+  content: ''; /* Remove the default chevron */
+  display: none; /* Hide the default Bootstrap chevron */
+}
 
 .custom-filter-container .btn i.bi-chevron-down {
-  margin-left: 40px;
+  margin-left: 10px; /* Space out the custom chevron */
+}
+
+.custom-filter-container .dropdown-menu {
+  min-width: auto;
+  padding: 0;
+  display: none; /* Start with the dropdown hidden */
+  opacity: 0; /* Make it invisible initially */
+  transition: opacity 0.3s ease-in-out; /* Smooth opacity transition */
+}
+
+.custom-filter-container .dropdown-menu.show {
+  display: block; /* Display the dropdown when it has the 'show' class */
+  opacity: 1; /* Make it fully visible */
+}
+
+.custom-filter-container .dropdown-item {
+  padding: 10px 15px;
+  color: #333;
+}
+
+.custom-filter-container .icon-img {
+  height: 20px;
+  margin-right: 10px;
+}
+
+.custom-filter-container .gray {
+  color: #7f7f7f;
 }
 
 .custom-filter-container .divider {
@@ -376,11 +428,20 @@
   margin-right: 10px;
 }
 
-.rounded-pill {
-  font-size: 14px;
-  background-color: #f5f5f5;
+.custom-filter-container .gray {
+  color: #7f7f7f;
 }
 
+/* Optional: custom chevron styles for dropdown items */
+.custom-filter-container .dropdown-toggle i.bi-chevron-down {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.custom-filter-container .divider {
+  border-left: 1px solid #ddd;
+  height: 40px;
+}
 .gray {
   color: #7f7f7f;
 
@@ -721,28 +782,80 @@
 
 <div class="custom-filter-container">
   <div class="d-flex justify-content-center gap-4 flex-wrap">
-    <button class="btn btn-light rounded-pill d-flex align-items-center px-4 py-2">
-      <img src="https://via.placeholder.com/20" alt="Nike Logo" class="icon-img">
-      Nike
-      <i class="bi bi-chevron-down"></i>
-    </button>
-    <button class="btn btn-light rounded-pill d-flex align-items-center px-4 py-2 gray">
-      Price
-      <i class="bi bi-chevron-down"></i>
-    </button>
-    <button class="btn btn-light rounded-pill d-flex align-items-center px-4 py-2 gray">
-      Category
-      <i class="bi bi-chevron-down"></i>
-    </button>
-    <button class="btn btn-light rounded-pill d-flex align-items-center px-4 py-2 gray">
-      Type
-      <i class="bi bi-chevron-down"></i>
-    </button>
+    <!-- Nike Filter -->
+    <div class="dropdown">
+      <button
+        class="btn btn-light rounded-pill d-flex align-items-center px-4 py-2 dropdown-toggle"
+        data-bs-toggle="dropdown" 
+        aria-expanded="false"
+      >
+        <img src="https://via.placeholder.com/20" alt="Nike Logo" class="icon-img">
+        Nike
+        <i class="bi bi-chevron-down"></i>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Nike Air</a></li>
+        <li><a class="dropdown-item" href="#">Nike Zoom</a></li>
+        <li><a class="dropdown-item" href="#">Nike Free</a></li>
+      </ul>
+    </div>
+
+    <!-- Price Filter -->
+    <div class="dropdown">
+      <button
+        class="btn btn-light rounded-pill d-flex align-items-center px-4 py-2 gray dropdown-toggle"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        Price
+        <i class="bi bi-chevron-down"></i>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">$0 - $50</a></li>
+        <li><a class="dropdown-item" href="#">$50 - $100</a></li>
+        <li><a class="dropdown-item" href="#">$100 - $200</a></li>
+      </ul>
+    </div>
+
+    <!-- Category Filter -->
+    <div class="dropdown">
+      <button
+        class="btn btn-light rounded-pill d-flex align-items-center px-4 py-2 gray dropdown-toggle"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+        >
+        Category
+
+        <i class="bi bi-chevron-down"></i>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Running</a></li>
+        <li><a class="dropdown-item" href="#">Casual</a></li>
+        <li><a class="dropdown-item" href="#">Sports</a></li>
+      </ul>
+    </div>
+
+
+
+    <!-- Divider -->
     <div class="divider"></div>
-    <button class="btn btn-light rounded-pill d-flex align-items-center px-4 py-2">
-      More Filter
-      <i class="bi bi-sliders ms-2"></i>
-    </button>
+
+    <!-- More Filter -->
+    <div class="dropdown">
+      <button
+        class="btn btn-light rounded-pill d-flex align-items-center px-4 py-2 dropdown-toggle"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        More Filter
+        <i class="bi bi-sliders ms-2"></i>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Newest</a></li>
+        <li><a class="dropdown-item" href="#">Best Sellers</a></li>
+        <li><a class="dropdown-item" href="#">Discounted</a></li>
+      </ul>
+    </div>
   </div>
 </div>
 
@@ -1081,6 +1194,8 @@
       }
       lastScrollTop = scrollTop;
     });
+
+    
   </script>
 </body>
 </html>
