@@ -20,7 +20,7 @@ if (isset($_GET['code'])) {
     $_SESSION['email'] = $userInfo->email;
     $_SESSION['name'] = $userInfo->name;
     $_SESSION['picture'] = $userInfo->picture;
-    $_SESSION['user_logged_in'] == true;
+
     header('Location: discover.php');
     exit();
 } else {
