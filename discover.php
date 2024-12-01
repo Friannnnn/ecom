@@ -6,7 +6,6 @@ $isLoggedIn = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] 
 $userProfileImage = isset($_SESSION['picture']) ? $_SESSION['user_profile_image'] : '';
 
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
