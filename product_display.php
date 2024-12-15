@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -226,28 +227,52 @@
         }
 
         .size-options {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin: 20px 0;
-        }
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
 
-        .size-options button {
-            padding: 15px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-        }
+.size-options button {
+    padding: 20px;
+    border: 2px solid #ddd;
+    background-color: #fff;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+    height: auto;
+}
 
-        .size-options button.active {
-            background-color: orange;
-            color: white;
-            border-color: orange;
-        }
+.size-options button.active {
+    background-color: orange;
+    color: white;
+    border-color: orange;
+}
 
+.size-options .button-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px; /* Add space between header and description */
+}
+
+.size-options .button-desc {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.size-options .button-detail {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ff5722;
+}
         .action-buttons {
             display: flex;
             gap: 20px;
@@ -273,85 +298,127 @@
             color: black;
             border: 2px solid black;
         }
+
+        .product-page-container {
+    margin-top: 30px; /* Adjust the space above the content */
+    padding: 0 15px; /* Optional: Add some horizontal padding */
+}
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="navbar-container">
-            <div class="brand-search-group">
-                <a class="navbar-brand" href="#">
-                    <img src="assets/logo_mini.jpg" alt="Logo" style="height: 50px; width: 50px; border-radius: 50%;">
-                </a>
-                <div class="input-container">
-                    <input class="form-control rounded-pill" type="search" placeholder='try "Generator"...' aria-label="Search">
-                    <i class="bi bi-search"></i>
-                </div>
-            </div>
-            <div class="accessibility-container">
-                <div class="icon">
-                    <i class="bi bi-bell"></i>
-                </div>
-                <button class="cart-button">
-                    <i class="bi bi-cart-fill"></i>
-                    <span>3 items</span>
-                </button>
+<div class="top-header">
+    <a href="#">Help Center</a><a href="#">Branch Tracker</a>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="navbar-container">
+        <div class="brand-search-group">
+            <a class="navbar-brand" href="#">
+                <img src="assets/logo_mini.jpg" alt="Logo" style="height: 50px; width: 50px; border-radius: 50%;">
+            </a>
+            <div class="input-container">
+                <input class="form-control rounded-pill" type="search" placeholder='try "Generator"...' aria-label="Search">
+                <i class="bi bi-search"></i>
             </div>
         </div>
-    </nav>
+        <div class="accessibility-container">
+            <div class="icon">
+                <i class="bi bi-bell"></i>
+            </div>
+            <button class="cart-button">
+                <i class="bi bi-cart-fill"></i>
+                <span>3 items</span>
+            </button>
+            <span class="separator">|</span>
 
+            <a href="profile.php" class="profile-link">
+                <div class="profile">
+                    <?php 
+                        if (isset($_SESSION['name'])) {
+                            $nameParts = explode(' ', $_SESSION['name']);
+                            $firstName = $nameParts[0];
+                            $secondName = isset($nameParts[1]) ? $nameParts[1] : '';
 
+                            echo '<img class="profile-photo" src="' . htmlspecialchars($_SESSION['picture']) . '" alt="Profile Photo">';
+                            echo '<span class="profile-name">' . htmlspecialchars($firstName) . ' ' . htmlspecialchars($secondName) . '</span>';
+                        } else {
+                            echo '<i class="bi bi-person profile-photo" style="font-size: 25px;"></i>';
+                            echo '<span class="profile-name">Profile</span>';
+                        }
+                    ?>
+                </div>
+            </a>
+        </div>
+    </div>
+</nav>
+<div class="product-page-container">
     <div class="product-container">
         <div class="image-gallery">
-            <img src="https://via.placeholder.com/500" alt="Product Image" id="mainImage">
+            <img src="https://via.placeholder.com/600x400" alt="Product Image">
             <div class="thumbnail-images">
-                <img src="https://via.placeholder.com/100" alt="Thumbnail 1" class="active" onclick="changeImage(this)">
-                <img src="https://via.placeholder.com/100" alt="Thumbnail 2" onclick="changeImage(this)">
-                <img src="https://via.placeholder.com/100" alt="Thumbnail 3" onclick="changeImage(this)">
-                <img src="https://via.placeholder.com/100" alt="Thumbnail 4" onclick="changeImage(this)">
-                <img src="https://via.placeholder.com/100" alt="Thumbnail 5" onclick="changeImage(this)">
+                <img src="https://via.placeholder.com/100x100" alt="Thumbnail" class="active">
+                <img src="https://via.placeholder.com/100x100" alt="Thumbnail">
+                <img src="https://via.placeholder.com/100x100" alt="Thumbnail">
             </div>
         </div>
+
         <div class="product-details">
-            <div class="product-subtitle">NEW ARRIVAL!</div>
-            <div class="product-title">Binibenta</div>
-            <div class="product-brand">
-                <img src="https://via.placeholder.com/24" alt="Brand Logo">
-                <span>Nike</span>
-                <span><i class="fa fa-star" style="color: orange;"></i> 4.9 (41 Reviews)</span>
-                <span>41 Sold</span>
-            </div>
+            <div class="product-subtitle">Category</div>
+            <div class="product-title">Amazing Power Tool</div>
             <div class="price">
-                <div class="original-price">Rp 4,000,000</div>
-                <div class="discounted-price">Mura lang may sukli kapa</div>
-            </div>
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="size-guide">Size Guide</div>
+                <span class="original-price">$199.99</span>
+                <span class="discounted-price">$159.99</span>
             </div>
             <div class="size-options">
-                <button>EU 36</button>
-                <button class="active">EU 37</button>
-                <button>EU 38</button>
-                <button>EU 39</button>
-                <button>EU 40</button>
-                <button>EU 41</button>
-                <button>EU 42</button>
-                <button>EU 43</button>
-                <button>EU 44</button>
+                <button class="active">
+                    <div class="button-header">Ships to Store for Pickup</div>
+                    <div class="button-desc">Get it</div>
+                    <div class="button-detail">FREE</div>
+                </button>
+                <button>
+                    <div class="button-header">Scheduled Delivery</div>
+                    <div class="button-desc">Delivery is not offered at this store</div>
+                    <div class="button-detail">Check delivery options</div>
+                </button>
+                <button>
+                    <div class="button-header">Ship It</div>
+                    <div class="button-desc">Usually ships next day</div>
+                    <div class="button-detail">Check arrival date and cost</div>
+                </button>
             </div>
+
             <div class="action-buttons">
-                <button class="buy-now"><i class="fa fa-shopping-cart"></i> Buy Now</button>
-                <button class="add-to-bag"><i class="fa fa-bag-shopping"></i> Add to Bag</button>
+                <button class="buy-now">Buy Now</button>
+                <button class="add-to-bag">Add to Bag</button>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        function changeImage(element) {
-            document.getElementById('mainImage').src = element.src;
-            document.querySelectorAll('.thumbnail-images img').forEach(img => img.classList.remove('active'));
-            element.classList.add('active');
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $('.navbar').addClass('hidden-navbar');
+        } else {
+            $('.navbar').removeClass('hidden-navbar');
         }
-    </script>
+    });
+
+    $('.thumbnail-images img').click(function () {
+        $('.thumbnail-images img').removeClass('active');
+        $(this).addClass('active');
+        $('.image-gallery img').attr('src', $(this).attr('src'));
+    });
+
+    $('.size-options button').click(function () {
+        $('.size-options button').removeClass('active');
+        $(this).addClass('active');
+    });
+</script>
+
 </body>
 </html>
