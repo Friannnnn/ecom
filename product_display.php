@@ -11,133 +11,28 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f9f9f9;
-            padding: 20px;
+            margin: 0;
         }
-        .product-container {
-            max-width: 1200px;
-            margin: auto;
-            display: flex;
-            gap: 30px;
-        }
-        .image-gallery {
-            width: 50%;
-        }
-        .image-gallery img {
-            width: 100%;
-            border-radius: 10px;
-            object-fit: cover;
-        }
-        .thumbnail-images {
-            display: flex;
-            gap: 12px;
-            margin-top: 15px;
-        }
-        .thumbnail-images img {
-            width: 18%;
-            cursor: pointer;
-            border-radius: 8px;
-            border: 2px solid transparent;
-            object-fit: cover;
-        }
-        .thumbnail-images img.active {
-            border-color: orange;
-        }
-        .product-details {
-            width: 50%;
-        }
-        .product-subtitle {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #ff5722;
-        }
-        .product-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #333;
-            margin-top: 10px;
-        }
-        .product-brand {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin: 20px 0;
-            font-size: 0.9rem;
-        }
-        .product-brand img {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-        }
-        .price {
-            margin: 20px 0;
-        }
-        .original-price {
-            text-decoration: line-through;
-            color: #aaa;
-            font-size: 1rem;
-        }
-        .discounted-price {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #333;
-        }
-        .size-options {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin: 20px 0;
-        }
-        .size-options button {
-            padding: 15px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-        }
-        .size-options button.active {
-            background-color: orange;
+
+        .top-header {
+            background-color: #131312;
+            padding: 10px 20px;
             color: white;
-            border-color: orange;
+            font-size: 14px;
         }
-        .action-buttons {
-            display: flex;
-            gap: 20px;
-            margin-top: 25px;
-        }
-        .action-buttons button {
-            flex: 1;
-            padding: 18px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .buy-now {
-            background-color: black;
+
+        .top-header a {
             color: white;
+            margin-right: 15px;
+            text-decoration: none;
+            font-size: 12px;
         }
-        .buy-now:hover {
-            background-color: #333;
+
+        .top-header a:not(:last-child)::after {
+            content: " |";
+            margin-left: 15px;
         }
-        .add-to-bag {
-            background-color: white;
-            color: black;
-            border: 2px solid black;
-        }
-        .add-to-bag:hover {
-            background-color: black;
-            color: white;
-        }
-        .size-guide {
-            color: #007bff;
-            font-size: 0.9rem;
-            text-decoration: underline;
-            cursor: pointer;
-        }
+
         .navbar {
             padding: 16px 40px;
             height: 90px;
@@ -149,26 +44,32 @@
             transition: top 0.3s ease-in-out;
             border-radius: 10px;
         }
+
         .hidden-navbar {
             top: -100px;
         }
+
         .navbar-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
         }
+
         .brand-search-group {
             display: flex;
             align-items: center;
         }
+
         .navbar-brand {
             margin-right: 20px;
         }
+
         .input-container {
             position: relative;
             width: 600px;
         }
+
         .form-control {
             padding-right: 30px;
             padding-left: 20px;
@@ -177,10 +78,12 @@
             border-color: #dcdcdc;
             border-radius: 25px;
         }
+
         .form-control:focus {
             border-color: #dcdcdc;
             box-shadow: none;
         }
+
         .bi-search {
             position: absolute;
             right: 20px;
@@ -188,15 +91,18 @@
             transform: translateY(-50%);
             font-size: 20px;
         }
+
         .accessibility-container {
             display: flex;
             align-items: center;
         }
+
         .accessibility-container .icon {
             margin-left: 15px;
             font-size: 20px;
             margin-right: 20px;
         }
+
         .accessibility-container .cart-button {
             background-color: #F5F4F4;
             border: none;
@@ -210,59 +116,70 @@
             justify-content: center;
             margin-right: 25px;
         }
+
         .accessibility-container .cart-button .bi-cart-fill {
             font-size: 18px;
         }
+
         .accessibility-container .cart-button span {
             margin-left: 8px;
             font-size: 14px;
             font-weight: bold;
         }
+
         .profile {
             display: flex;
             align-items: center;
         }
+
         .profile-name {
             margin-left: 10px;
             font-size: 14px;
         }
+
         .profile-photo {
             width: 35px;
             height: 35px;
             border-radius: 50%;
             margin-left: 15px;
         }
+
         .profile-link {
             display: block;
             text-decoration: none;
             color: inherit;
         }
+
         .separator {
             margin-left: 8px;
             margin-right: 8px;
             font-size: 14px;
             color: #B8B8B8;
         }
-        /* Remaining product-specific styles */
+
         .product-container {
             max-width: 1200px;
             margin: auto;
             display: flex;
             gap: 30px;
         }
+
         .image-gallery {
             width: 50%;
         }
+
         .image-gallery img {
             width: 100%;
             border-radius: 10px;
             object-fit: cover;
         }
+
         .thumbnail-images {
             display: flex;
             gap: 12px;
             margin-top: 15px;
         }
+
         .thumbnail-images img {
             width: 18%;
             cursor: pointer;
@@ -270,41 +187,73 @@
             border: 2px solid transparent;
             object-fit: cover;
         }
+
         .thumbnail-images img.active {
             border-color: orange;
         }
+
         .product-details {
             width: 50%;
         }
+
         .product-subtitle {
             font-size: 1.2rem;
             font-weight: 600;
             color: #ff5722;
         }
+
         .product-title {
             font-size: 2rem;
             font-weight: 700;
             color: #333;
             margin-top: 10px;
         }
+
         .price {
             margin: 20px 0;
         }
+
         .original-price {
             text-decoration: line-through;
             color: #aaa;
             font-size: 1rem;
         }
+
         .discounted-price {
             font-size: 1.8rem;
             font-weight: 700;
             color: #333;
         }
+
+        .size-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .size-options button {
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        .size-options button.active {
+            background-color: orange;
+            color: white;
+            border-color: orange;
+        }
+
         .action-buttons {
             display: flex;
             gap: 20px;
             margin-top: 25px;
         }
+
         .action-buttons button {
             flex: 1;
             padding: 18px;
@@ -313,16 +262,17 @@
             font-size: 1.2rem;
             cursor: pointer;
         }
+
         .buy-now {
             background-color: black;
             color: white;
         }
+
         .add-to-bag {
             background-color: white;
             color: black;
             border: 2px solid black;
         }
-
     </style>
 </head>
 <body>
@@ -346,26 +296,10 @@
                     <i class="bi bi-cart-fill"></i>
                     <span>3 items</span>
                 </button>
-                <span class="separator">|</span>
-                <a href="profile.php" class="profile-link">
-                    <div class="profile">
-                        <?php 
-                        if (isset($_SESSION['name'])) {
-                            $nameParts = explode(' ', $_SESSION['name']);
-                            $firstName = $nameParts[0];
-                            $secondName = isset($nameParts[1]) ? $nameParts[1] : '';
-                            echo '<img class="profile-photo" src="' . htmlspecialchars($_SESSION['picture']) . '" alt="Profile Photo">';
-                            echo '<span class="profile-name">' . htmlspecialchars($firstName) . ' ' . htmlspecialchars($secondName) . '</span>';
-                        } else {
-                            echo '<i class="bi bi-person profile-photo" style="font-size: 25px;"></i>';
-                            echo '<span class="profile-name">Profile</span>';
-                        }
-                        ?>
-                    </div>
-                </a>
             </div>
         </div>
     </nav>
+
 
     <div class="product-container">
         <div class="image-gallery">

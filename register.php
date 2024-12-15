@@ -1,3 +1,22 @@
+<?php
+require_once 'vendor/autoload.php';
+
+session_start();
+
+$googleClient = new Google_Client();
+$googleClient->setClientId('320054654260-fcptfeujln15q5biepe21obl7q2bkvr3.apps.googleusercontent.com');
+$googleClient->setClientSecret('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');
+$googleClient->setRedirectUri('http://localhost/ecom/callback.php');
+$googleClient->addScope('email');
+$googleClient->addScope('profile');
+
+if (isset($_SESSION['name'])) {
+    
+    header("location: profile.php");
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,8 +31,10 @@
         }
 
         .navbar {
-            padding: 20px 0;
-            border-bottom: 1px solid #eaeaea;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            padding: 0;
         }
 
         .navbar-brand {
@@ -175,6 +196,12 @@
             transition: color 0.3s ease;
         }
 
+        .google-btn a {
+        color: inherit;
+        text-decoration: none;
+    }
+    
+
         .google-btn span {
             position: relative;
             display: flex;
@@ -241,6 +268,70 @@
             font-size: 12px;
             display: none;
         }
+        .modal-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    margin-top: 200px;
+}
+
+.modal-content {
+    margin-top: 5%;
+    width: 100%;
+    max-width: 500px;
+    min-height: auto;
+}
+
+.modal-body {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.modal-text {
+    color: black; /* Text color */
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.landscape-btn {
+    padding: 15px 40px;
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+    background-color: white;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    width: 80%;
+    display: inline-block;
+    margin-bottom: 10px; /* Space between buttons */
+}
+
+.landscape-btn:hover {
+    background-color: black;
+    color: white;
+}
+
+.maybe-later-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 10px; /* Space below "Set Up Now" button */
+}
+
+.maybe-later-text:hover {
+    text-decoration: underline;
+}
+
+.modal-body div {
+    margin-bottom: 15px; /* Ensure proper spacing between the "Set Up Now" button and the "Maybe Later" link */
+}
+
 
         @media (max-width: 576px) {
             body {
@@ -263,47 +354,28 @@
 <body>
     <div class="container-fluid">
         <nav class="navbar navbar-light bg-white position-relative">
-            <div class="container d-flex justify-content-end align-items-center">
+            <div class="container d-flex justify-content-center align-items-center">
                 <a class="navbar-brand" href="#">KAISERMARK POWERTOOLS</a>
-                <a href="#" class="nav-link">Search</a>
-                <a href="#" class="nav-link">Account</a>
-                <a href="#" class="nav-link icon-spacing">
-                    <i class="bi bi-bell"></i>
-                </a>
             </div>
         </nav>
         <div class="container form-container">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <form id="registerForm">
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder=" " required>
-                                    <label>First Name</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder=" " required>
-                                    <label>Last Name</label>
-                                </div>
-                            </div>
-                        </div>
                         <div class="form-group mb-3">
-                            <input type="email" class="form-control" placeholder=" " required>
+                            <input type="email" class="form-control" id="email" placeholder=" " required>
                             <label>Email</label>
                         </div>
                         <div class="form-group mb-3">
-                            <input type="password" id="password" class="form-control" placeholder=" " required>
+                            <input type="password" id="password" class="form-control" placeholder=" " required minlength="8">
                             <label>Password</label>
                             <i class="bi bi-eye eye-icon" id="toggle-password" onclick="togglePassword()"></i>
                         </div>
                         <div class="form-group mb-3">
-                            <input type="password" id="confirm-password" class="form-control" placeholder=" " required>
+                            <input type="password" id="confirm-password" class="form-control" placeholder=" " required minlength="8">
                             <label>Confirm Password</label>
-                            <div id="error-message" class="error-message">Passwords do not match.</div>
                         </div>
+                        <div id="error-message" class="error-message">Passwords do not match.</div>
                         <div class="text-center mb-3">
                             <button type="submit" class="btn btn-create">
                                 <span>Create</span>
@@ -312,48 +384,51 @@
                         <div class="divider">or</div>
                     </form>
                     <button class="google-btn">
-                        <span><i class="bi bi-google"></i>Sign in with Google</span>
-                    </button>
+    <a href="<?php echo htmlspecialchars($googleClient->createAuthUrl()); ?>" style="text-decoration:none;">
+        <span><i class="bi bi-google"></i>Sign in with Google</span>
+    </a>
+</button>
                     <p class="text-center mt-3">Already have an account? <a href="login.php" class="login-link">Log in</a></p>
                 </div>
             </div>
         </div>
     </div>
-
+    <div class="modal fade" id="setupModal" tabindex="-1" aria-labelledby="setupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="modal-text">Would you like to set up your account?</p>
+                <a href="profile.php" class="landscape-btn" id="setupNowLink">Set Up Now</a> <br>
+                <a href="discover.php" class="maybe-later-text" id="maybeLaterLink">Maybe Later</a>
+            </div>
+        </div>
+    </div>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        const modal = new bootstrap.Modal(document.getElementById('setupModal'), {
+            keyboard: false
+        });
+
         function togglePassword() {
             const passwordField = document.getElementById('password');
             const confirmPasswordField = document.getElementById('confirm-password');
-            const icon = document.getElementById('toggle-password');
-            
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                confirmPasswordField.type = 'text';
-                icon.classList.remove('bi-eye');
-                icon.classList.add('bi-eye-slash');
-            } else {
-                passwordField.type = 'password';
-                confirmPasswordField.type = 'password';
-                icon.classList.remove('bi-eye-slash');
-                icon.classList.add('bi-eye');
-            }
+            const type = passwordField.type === 'password' ? 'text' : 'password';
+            passwordField.type = type;
+            confirmPasswordField.type = type;
         }
 
-        document.getElementById('registerForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-            
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
-            
             const errorMessage = document.getElementById('error-message');
-            
             if (password !== confirmPassword) {
                 errorMessage.style.display = 'block';
                 return;
             }
-            
-            alert("Form submitted successfully!");
+            errorMessage.style.display = 'none';
+            modal.show();
         });
     </script>
 </body>

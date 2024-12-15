@@ -1,3 +1,5 @@
+
+
 <?php
 require_once 'vendor/autoload.php';
 
@@ -10,6 +12,13 @@ $googleClient->setRedirectUri('http://localhost/ecom/callback.php');
 $googleClient->addScope('email');
 $googleClient->addScope('profile');
 
+if (isset($_SESSION['name'])) {
+    
+    header("location: profile.php");
+
+}
+
+
 
 ?>
 
@@ -18,21 +27,20 @@ $googleClient->addScope('profile');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaisermark Powertools - Register</title>
+    <title>Kaisermark Powertools - Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
-            overflow: hidden;
         }
 
         .navbar {
-    height: 80px; /* Adjust this value to match the original height */
-    display: flex;
-    align-items: center;
-    padding: 0; /* Remove padding if unnecessary */
-}
+            height: 80px;
+            display: flex;
+            align-items: center;
+            padding: 0;
+        }
 
         .navbar-brand {
             font-size: 24px;
@@ -61,9 +69,9 @@ $googleClient->addScope('profile');
             border-radius: 0;
             border: 1px solid #ccc;
             box-shadow: none;
+            margin-bottom: 25px;
             padding-left: 10px;
             padding-right: 10px;
-            margin-bottom: 25px;
         }
 
         .form-control:focus {
@@ -72,7 +80,43 @@ $googleClient->addScope('profile');
             border-color: #ccc;
         }
 
-        .btn-create, .btn-outline-secondary, .google-btn {
+        .form-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            position: absolute;
+            left: 12px;
+            top: 14px;
+            font-size: 14px;
+            pointer-events: none;
+            transition: all 0.2s ease;
+        }
+
+        .form-group input {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .form-group input:focus {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .form-control:focus::placeholder {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .form-control:not(:placeholder-shown) ~ label,
+        .form-control:focus ~ label {
+            top: -18px;
+            font-size: 12px;
+            color: #555;
+        }
+
+        .btn-create {
             position: relative;
             display: inline-block;
             height: 50px;
@@ -81,14 +125,15 @@ $googleClient->addScope('profile');
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 48%;
-            color: rgb(28, 31, 30);
+            width: 100%;
+            background-color: transparent;
             border: 1px solid rgb(28, 31, 30);
             overflow: hidden;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            transition: color 0.3s ease;
         }
 
-        .btn-create::before, .btn-outline-secondary::before, .google-btn::before {
+        .btn-create::before {
             content: "";
             position: absolute;
             top: 100%;
@@ -100,69 +145,34 @@ $googleClient->addScope('profile');
             z-index: 0;
         }
 
-        .btn-create:hover::before, .btn-outline-secondary:hover::before, .google-btn:hover::before {
+        .btn-create:hover::before {
             top: 0;
         }
 
-        .btn-create:hover, .btn-outline-secondary:hover, .google-btn:hover {
-            color: rgb(255,255,255);
-            transition: 0.2s 0.1s;
+        .btn-create:hover {
+            color: white;
         }
 
-        .btn-2 {
+        .btn-create span {
             position: relative;
-            border: 1px solid rgb(28, 31, 30);
-            display: inline-block;
-            width: 300px;
-            height: 60px;
-            background-color: transparent;
-            cursor: pointer;
-            min-width: 100%;
-        }
-
-        .btn-2 span {
-            position: relative;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 15px 20px;
             font-size: 14px;
             font-weight: bold;
             letter-spacing: 2px;
             text-transform: uppercase;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 15px 20px;
-            transition: 0.3s;
-        }
-
-        .btn-3 {
-            position: relative;
-            display: inline-block;
-            width: 200px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            min-width: 50%;
-        }
-
-        .btn-3 span {
-            position: relative;
-            display: inline-block;
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 15px 20px;
-            transition: 0.3s;
+            z-index: 1;
         }
 
         .divider {
             display: flex;
             align-items: center;
             text-align: center;
-            margin: 30px 0;
+            margin: 25px 0;
         }
 
         .divider::before,
@@ -180,7 +190,7 @@ $googleClient->addScope('profile');
             margin-left: .5em;
         }
 
-        .google-btn.btn-3 {
+        .google-btn {
             position: relative;
             display: inline-block;
             width: 100%;
@@ -188,11 +198,16 @@ $googleClient->addScope('profile');
             border: 1px solid rgb(28, 31, 30);
             overflow: hidden;
             cursor: pointer;
-            text-decoration: none;
             transition: color 0.3s ease;
         }
 
-        .google-btn.btn-3 span {
+        .google-btn a {
+        color: inherit;
+        text-decoration: none;
+    }
+    
+
+        .google-btn span {
             position: relative;
             display: flex;
             align-items: center;
@@ -207,8 +222,7 @@ $googleClient->addScope('profile');
             z-index: 1;
         }
 
-        .google-btn.btn-3::before {
-
+        .google-btn::before {
             content: "";
             position: absolute;
             top: 100%;
@@ -220,17 +234,12 @@ $googleClient->addScope('profile');
             z-index: 0;
         }
 
-        .google-btn.btn-3:hover::before {
+        .google-btn:hover::before {
             top: 0;
         }
 
-        .google-btn.btn-3:hover {
+        .google-btn:hover {
             color: white;
-        }
-
-        .google-btn a {
-        text-decoration: none;
-        color: inherit;
         }
 
         .login-link {
@@ -252,46 +261,19 @@ $googleClient->addScope('profile');
             right: 20px;
         }
 
-        .form-control:focus::placeholder {
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-
-        .form-control:focus ~ label {
-            top: -18px;
-            font-size: 12px;
-            color: #555;
-        }
-
-        .form-group {
-            position: relative;
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
+        .eye-icon {
             position: absolute;
-            left: 12px;
-            top: 14px;
-            font-size: 14px;
-            pointer-events: none;
-            transition: all 0.2s ease;
+            right: 12px;
+            top: 15px;
+            cursor: pointer;
         }
 
-        .form-control:not(:placeholder-shown) ~ label {
-            top: -18px;
+        .error-message {
+            color: red;
             font-size: 12px;
-            color: #555;
+            display: none;
         }
 
-        #toggle-password {
-    position: absolute;
-    top: 45%;
-    right: 15px;
-    transform: translateY(-100%);
-    cursor: pointer;
-}
-     
-        
         @media (max-width: 576px) {
             body {
                 overflow: visible;
@@ -312,15 +294,15 @@ $googleClient->addScope('profile');
 
 <body>
     <div class="container-fluid">
-            <nav class="navbar navbar-light bg-white position-relative">
-                <div class="container d-flex justify-content-center align-items-center">
-                    <a class="navbar-brand" href="#">KAISERMARK POWERTOOLS</a>
-                </div>
-            </nav>
+        <nav class="navbar navbar-light bg-white position-relative">
+            <div class="container d-flex justify-content-center align-items-center">
+                <a class="navbar-brand" href="#">KAISERMARK POWERTOOLS</a>
+            </div>
+        </nav>
         <div class="container form-container">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
-                    <form>
+                    <form id="loginForm">
                         <div class="form-group mb-3">
                             <input type="email" class="form-control" placeholder=" " required>
                             <label>Email</label>
@@ -328,50 +310,42 @@ $googleClient->addScope('profile');
                         <div class="form-group mb-3">
                             <input type="password" id="password" class="form-control" placeholder=" " required>
                             <label>Password</label>
-                            <span id="toggle-password" class="bi bi-eye position-absolute" style="right: 10px; top: 38px; cursor: pointer;"></span>
+                            <i class="bi bi-eye eye-icon" id="toggle-password" onclick="togglePassword()"></i>
                         </div>
-                        <button type="submit" class="btn btn-create btn-2 hover-slide-up">
-                            <span>LOGIN</span>
-                        </button>
+                        <div class="text-center mb-3">
+                            <button type="submit" class="btn btn-create">
+                                <span>Log In</span>
+                            </button>
+                        </div>
+                        <div class="divider">or</div>
                     </form>
-                    <center>
-    <div class="text-center">
-        <span>Don't have an account?</span>
-        <a href="register.php" class="login-link"> Register</a>
-    </div>
-</center>
-                    <div class="divider">OR</div>
-                    <center>
-                        <button type="button" class="btn btn-outline-dark google-btn btn-3 hover-slide-up">
-                            <a class="cont-google" href="<?php echo htmlspecialchars($googleClient->createAuthUrl()); ?>">
-                            <span class="cont-google">
-                                <i class="bi bi-google"></i>Continue with Google
-                            </span>
-                        </a>
-                        </button>
-                    </center>
+                    <button class="google-btn">
+    <a href="<?php echo htmlspecialchars($googleClient->createAuthUrl()); ?>" style="text-decoration:none;">
+        <span><i class="bi bi-google"></i>Sign in with Google</span>
+    </a>
+</button>
+                    <p class="text-center mt-3">Don't have an account? <a href="register.php" class="login-link">Sign up</a></p>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.getElementById('toggle-password').addEventListener('click', function() {
-            var passwordField = document.getElementById('password');
-            var icon = this;
-
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const icon = document.getElementById('toggle-password');
+            
             if (passwordField.type === 'password') {
                 passwordField.type = 'text';
-                icon.classList.remove('bi-eye');
                 icon.classList.add('bi-eye-slash');
+                icon.classList.remove('bi-eye');
             } else {
                 passwordField.type = 'password';
                 icon.classList.remove('bi-eye-slash');
                 icon.classList.add('bi-eye');
             }
-        });
+        }
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

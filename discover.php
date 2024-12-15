@@ -729,7 +729,7 @@ session_start();
   <div class="arrival-discount-container">
     <div class="product-card">
       <img src="assets/arrival_prod.jpg" alt="Product Image">
-      <a href="#" class="view-button">View Product</a>
+      <a href="product_display.php" class="view-button">View Product</a>
     </div>
     <div class="discount-card">
       <img src="assets/disc_card.jpg" alt="Discount Image">
@@ -854,7 +854,7 @@ session_start();
 
         <i class="bi bi-chevron-down"></i>
       </button>
-      <ul class="dropdown-menu">
+      <ul class="dropdown-menu">  
         <li><a class="dropdown-item" href="#">Outdoor</a></li>
         <li><a class="dropdown-item" href="#">Indoor</a></li>
         <li><a class="dropdown-item" href="#">Backdoor</a></li>
