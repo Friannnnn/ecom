@@ -5,6 +5,9 @@ if (!isset($_SESSION['email'])) {
     header('Location: login.php');
     exit();
 }
+
+// Check if the form is submitted
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -209,11 +212,12 @@ if (!isset($_SESSION['email'])) {
 }
 
 .accessibility-container .icon {
-    margin-left: 15px;
-    font-size: 20px;
-    margin-right: 20px;
+    margin-left: 15px; /* Space between the bell icon and other elements */
+    font-size: 20px; /* Increase the icon size to match the cart and profile photo */
+    margin-right: 20px; /* Space between the bell and cart button */
+    display: flex;
+    align-items: center;
 }
-
 .accessibility-container .cart-button {
     background-color: #F5F4F4;
     border: none;
@@ -228,15 +232,7 @@ if (!isset($_SESSION['email'])) {
     margin-right: 25px;
 }
 
-.accessibility-container .cart-button .bi-cart-fill {
-    font-size: 18px;
-}
-
-.accessibility-container .cart-button span {
-    margin-left: 8px;
-    font-size: 14px;
-    font-weight: bold;
-}
+i
 
 .profile {
     display: flex;
@@ -451,6 +447,19 @@ if (!isset($_SESSION['email'])) {
     z-index: 1;
 }
 
+/* Style for the Cancel button */
+.cancel-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: black;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+
         .row-cols-md-2 .form-group {
             display: flex;
             gap: 20px;
@@ -483,7 +492,7 @@ if (!isset($_SESSION['email'])) {
             </button>
             <span class="separator">|</span>
 
-            <a href="user-edit.php" class="profile-link">
+            <a href="profile-edit.php" class="profile-link">
                 <div class="profile">
                     <?php 
                         if (isset($_SESSION['name'])) {
@@ -532,67 +541,70 @@ if (!isset($_SESSION['email'])) {
                 </div>
             </div>
         </div>
-
-        <!-- Form Container -->
         <div class="form-container">
-            <h4>Edit Profile</h4>
-            <form>
-                <div class="row row-cols-md-2">
-                <div class="form-group">
-                        <!-- Pre-populate Username input -->
-                        <input type="text" class="form-control" id="username" placeholder=" " value="<?php echo isset($username) ? htmlspecialchars($username) : ''; ?>">
-                        <label for="username">Username</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="email" placeholder=" " value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>">
-                        <label for="email">Email</label>
-                    </div>
-                </div>
-                <div class="row row-cols-md-2">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="firstName" placeholder=" " value="<?php echo isset($firstName) ? htmlspecialchars($firstName) : ''; ?>">
-                        <label for="firstName">First Name</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="lastName" placeholder=" " value="<?php echo isset($secondName) ? htmlspecialchars($secondName) : ''; ?>">
-                        <label for="lastName">Last Name</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="address" placeholder=" ">
-                    <label for="address">Address</label>
-                </div>
-                <div class="row row-cols-md-3">
-                    <div class="form-group">
-                        <select class="form-control" id="city" placeholder=" " >
-                            <option value="" disabled selected>Select City</option>
-                        </select>
-                        <label for="city">City</label>
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control" id="province" placeholder=" ">
-                            <option value=""  selected>Select Province</option>
-                        </select>
-                        <label for="province">Province</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="postalCode" placeholder=" ">
-                        <label for="postalCode">Postal Code</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" id="aboutMe" placeholder=" "></textarea>
-                    <label for="aboutMe">About Me</label>
-                </div>
-                <button type="submit" class="btn-update">
-                    <span>Update Profile</span>
-                </button>
-            </form>
+    <h4>Edit Profile</h4>
+    <form action="profile-edit.php" method="POST">
+        <div class="row row-cols-md-2">
+            <div class="form-group">
+                <!-- Pre-populate Username input -->
+                <input type="text" class="form-control" id="username" placeholder=" " value="<?php echo isset($username) ? htmlspecialchars($username) : ''; ?>">
+                <label for="username">Username</label>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" id="email" placeholder=" " value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>">
+                <label for="email">Email</label>
+            </div>
         </div>
-    </div>
+        <div class="row row-cols-md-2">
+            <div class="form-group">
+                <input type="text" class="form-control" id="firstName" placeholder=" " value="<?php echo isset($firstName) ? htmlspecialchars($firstName) : ''; ?>">
+                <label for="firstName">First Name</label>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="lastName" placeholder=" " value="<?php echo isset($secondName) ? htmlspecialchars($secondName) : ''; ?>">
+                <label for="lastName">Last Name</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="address" placeholder=" ">
+            <label for="address">Address</label>
+        </div>
+        <div class="row row-cols-md-3">
+            <div class="form-group">
+                <select class="form-control" id="city" placeholder=" ">
+                    <option value="" disabled selected>Select City</option>
+                </select>
+                <label for="city">City</label>
+            </div>
+            <div class="form-group">
+                <select class="form-control" id="province" placeholder=" ">
+                    <option value="" selected>Select Province</option>
+                </select>
+                <label for="province">Province</label>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="postalCode" placeholder=" ">
+                <label for="postalCode">Postal Code</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" id="aboutMe" placeholder=" "></textarea>
+            <label for="aboutMe">About Me</label>
+        </div>
+        <button type="submit" class="btn-update">
+            <span>Update Profile</span>
+        </button>
+        <!-- Cancel Button -->
+        <center>
+            
+            <a href="profile-display.php" class="cancel-link">
+                Cancel
+            </a>
+        </center>
+    </form>
+</div>
 
-
-    <script>
+<script>
     document.addEventListener('DOMContentLoaded', () => {
         const provinceSelect = document.getElementById('province');
         const citySelect = document.getElementById('city');

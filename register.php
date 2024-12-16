@@ -1,7 +1,11 @@
 <?php
 require_once 'vendor/autoload.php';
+include 'config.php';  // Include the config file for the database connection
 
 session_start();
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 $googleClient = new Google_Client();
 $googleClient->setClientId('320054654260-fcptfeujln15q5biepe21obl7q2bkvr3.apps.googleusercontent.com');
@@ -11,10 +15,49 @@ $googleClient->addScope('email');
 $googleClient->addScope('profile');
 
 if (isset($_SESSION['name'])) {
-    
-    header("location: profile.php");
-
+    header("location: profile-display.php");
+    exit();
 }
+
+// Initialize variables for form validation
+$errorMessage = '';
+$success = false;
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+    $password = $_POST['password'] ?? '';
+    $confirmPassword = $_POST['confirm_password'] ?? '';
+
+    if (!$email) {
+        $errorMessage = 'Invalid email address.';
+    } elseif (strlen($password) < 8) {
+        $errorMessage = 'Password must be at least 8 characters long.';
+    } elseif ($password !== $confirmPassword) {
+        $errorMessage = 'Passwords do not match.';
+    } else {
+        // Insert the user data into the database (without hashing the password)
+        $stmt = $conn->prepare("INSERT INTO users (email, password, first_name, last_name, address, city, province, postal_code, about_me)
+                               VALUES (?, ?, NULL, NULL, NULL, NULL, NULL, NULL, NULL)");
+
+        // Bind the parameters
+        $stmt->bind_param('ss', $email, $password);
+
+        // Execute the query
+        if ($stmt->execute()) {
+            $success = true;
+        
+            // Set session variable to trigger the redirect
+            $_SESSION['email'] = $email;
+            header("Location: profile-edit.php"); // Redirect to profile-edit page
+            exit();
+        }
+        // Close the prepared statement
+        $stmt->close();
+    }
+}
+
+$conn->close();  // Close the database connection
 ?>
 
 <!DOCTYPE html>
@@ -268,86 +311,6 @@ if (isset($_SESSION['name'])) {
             font-size: 12px;
             display: none;
         }
-        .modal-dialog {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-    margin-top: 200px;
-}
-
-.modal-content {
-    margin-top: 5%;
-    width: 100%;
-    max-width: 500px;
-    min-height: auto;
-}
-
-.modal-body {
-    text-align: center;
-    padding-bottom: 20px;
-}
-
-.modal-text {
-    color: black; /* Text color */
-    font-size: 18px;
-    margin-bottom: 20px;
-}
-
-.landscape-btn {
-    padding: 15px 40px;
-    font-size: 16px;
-    font-weight: 600;
-    color: black;
-    background-color: white;
-    border: none;
-    border-radius: 50px;
-    text-decoration: none;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    width: 80%;
-    display: inline-block;
-    margin-bottom: 10px; /* Space between buttons */
-}
-
-.landscape-btn:hover {
-    background-color: black;
-    color: white;
-}
-
-.maybe-later-text {
-    font-size: 14px;
-    font-weight: 500;
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-    display: inline-block;
-    margin-top: 10px; /* Space below "Set Up Now" button */
-}
-
-.maybe-later-text:hover {
-    text-decoration: underline;
-}
-
-.modal-body div {
-    margin-bottom: 15px; /* Ensure proper spacing between the "Set Up Now" button and the "Maybe Later" link */
-}
-
-
-        @media (max-width: 576px) {
-            body {
-                overflow: visible;
-            }
-            .navbar-brand {
-                display: block;
-                position: relative;
-                left: auto;
-                transform: translateX(0);
-                margin: auto;
-            }
-            .nav-link {
-                display: none;
-            }
-        }
     </style>
 </head>
 
@@ -361,21 +324,24 @@ if (isset($_SESSION['name'])) {
         <div class="container form-container">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
-                    <form id="registerForm">
+                    <!-- Registration form -->
+                    <form id="registerForm" method="POST">
                         <div class="form-group mb-3">
-                            <input type="email" class="form-control" id="email" placeholder=" " required>
+                            <input type="email" class="form-control" id="email" name="email" placeholder=" " required>
                             <label>Email</label>
                         </div>
                         <div class="form-group mb-3">
-                            <input type="password" id="password" class="form-control" placeholder=" " required minlength="8">
+                            <input type="password" id="password" name="password" class="form-control" placeholder=" " required minlength="8">
                             <label>Password</label>
                             <i class="bi bi-eye eye-icon" id="toggle-password" onclick="togglePassword()"></i>
                         </div>
                         <div class="form-group mb-3">
-                            <input type="password" id="confirm-password" class="form-control" placeholder=" " required minlength="8">
+                            <input type="password" id="confirm-password" name="confirm_password" class="form-control" placeholder=" " required minlength="8">
                             <label>Confirm Password</label>
                         </div>
-                        <div id="error-message" class="error-message">Passwords do not match.</div>
+                        <?php if ($errorMessage): ?>
+                            <div id="error-message" class="error-message"><?php echo $errorMessage; ?></div>
+                        <?php endif; ?>
                         <div class="text-center mb-3">
                             <button type="submit" class="btn btn-create">
                                 <span>Create</span>
@@ -383,53 +349,35 @@ if (isset($_SESSION['name'])) {
                         </div>
                         <div class="divider">or</div>
                     </form>
-                    <button class="google-btn">
-    <a href="<?php echo htmlspecialchars($googleClient->createAuthUrl()); ?>" style="text-decoration:none;">
-        <span><i class="bi bi-google"></i>Sign in with Google</span>
-    </a>
-</button>
-                    <p class="text-center mt-3">Already have an account? <a href="login.php" class="login-link">Log in</a></p>
+                    <div class="d-flex justify-content-center">
+                        <div class="google-btn">
+                            <a href="<?php echo $googleClient->createAuthUrl(); ?>">
+                                <span><i class="bi bi-google "></i> Sign Up With Google</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="login.php" class="login-link">Already have an account? Login</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="setupModal" tabindex="-1" aria-labelledby="setupModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <p class="modal-text">Would you like to set up your account?</p>
-                <a href="user-edit.php" class="landscape-btn" id="setupNowLink">Set Up Now</a> <br>
-                <a href="discover.php" class="maybe-later-text" id="maybeLaterLink">Maybe Later</a>
-            </div>
-        </div>
-    </div>
-</div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        const modal = new bootstrap.Modal(document.getElementById('setupModal'), {
-            keyboard: false
-        });
-
         function togglePassword() {
-            const passwordField = document.getElementById('password');
-            const confirmPasswordField = document.getElementById('confirm-password');
-            const type = passwordField.type === 'password' ? 'text' : 'password';
-            passwordField.type = type;
-            confirmPasswordField.type = type;
-        }
-
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-            const errorMessage = document.getElementById('error-message');
-            if (password !== confirmPassword) {
-                errorMessage.style.display = 'block';
-                return;
+            var passwordField = document.getElementById("password");
+            var confirmPasswordField = document.getElementById("confirm-password");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                confirmPasswordField.type = "text";
+            } else {
+                passwordField.type = "password";
+                confirmPasswordField.type = "password";
             }
-            errorMessage.style.display = 'none';
-            modal.show();
-        });
+        }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

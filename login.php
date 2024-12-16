@@ -1,7 +1,7 @@
 
-
 <?php
 require_once 'vendor/autoload.php';
+require_once 'config.php'; // Database connection file
 
 session_start();
 
@@ -12,14 +12,60 @@ $googleClient->setRedirectUri('http://localhost/ecom/callback.php');
 $googleClient->addScope('email');
 $googleClient->addScope('profile');
 
+// Check if the user is already logged in
 if (isset($_SESSION['name'])) {
-    
-    header("location: profile.php");
-
+    header("Location: profile.php");
+    exit;
 }
 
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
+    // Create a database connection
 
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Sanitize input
+    $email = $conn->real_escape_string($email);
+    $password = $conn->real_escape_string($password);
+
+    // Query the database for the user
+    $sql = "SELECT * FROM users WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        // Fetch user data
+        $user = $result->fetch_assoc();
+
+        // Verify the password using password_verify
+        if (password_verify($password, $user['password'])) {
+            // Start session and store user data
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['name'] = $user['first_name'] . ' ' . $user['last_name'];
+            $_SESSION['email'] = $user['email'];
+
+            // Redirect to profile page
+            header("Location: discover.php");
+            exit;
+        } else {
+            // Invalid password
+            $error_message = "Invalid email or password.";
+        }
+    } else {
+        // User not found
+        $error_message = "No user found with this email.";
+    }
+
+    $stmt->close();
+    $conn->close();
+}
 ?>
 
 <!DOCTYPE html>
@@ -302,16 +348,22 @@ if (isset($_SESSION['name'])) {
         <div class="container form-container">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
-                    <form id="loginForm">
+                    <form action="login.php" method="POST">
                         <div class="form-group mb-3">
-                            <input type="email" class="form-control" placeholder=" " required>
+                            <input type="email" name="email" class="form-control" placeholder=" " required>
                             <label>Email</label>
                         </div>
                         <div class="form-group mb-3">
-                            <input type="password" id="password" class="form-control" placeholder=" " required>
+                            <input type="password" id="password" name="password" class="form-control" placeholder=" " required>
                             <label>Password</label>
                             <i class="bi bi-eye eye-icon" id="toggle-password" onclick="togglePassword()"></i>
                         </div>
+
+                        <!-- Error message -->
+                        <?php if (isset($error_message)): ?>
+                            <div class="error-message text-center"><?php echo $error_message; ?></div>
+                        <?php endif; ?>
+
                         <div class="text-center mb-3">
                             <button type="submit" class="btn btn-create">
                                 <span>Log In</span>
@@ -319,11 +371,13 @@ if (isset($_SESSION['name'])) {
                         </div>
                         <div class="divider">or</div>
                     </form>
+
                     <button class="google-btn">
-    <a href="<?php echo htmlspecialchars($googleClient->createAuthUrl()); ?>" style="text-decoration:none;">
-        <span><i class="bi bi-google"></i>Sign in with Google</span>
-    </a>
-</button>
+                        <a href="<?php echo htmlspecialchars($googleClient->createAuthUrl()); ?>" style="text-decoration:none;">
+                            <span><i class="bi bi-google"></i>Sign in with Google</span>
+                        </a>
+                    </button>
+
                     <p class="text-center mt-3">Don't have an account? <a href="register.php" class="login-link">Sign up</a></p>
                 </div>
             </div>

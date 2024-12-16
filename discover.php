@@ -701,7 +701,7 @@ session_start();
         </button>
         <span class="separator">|</span>
 
-        <a href="user-edit.php" class="profile-link">
+        <a href="profile-display.php" class="profile-link">
 
         <div class="profile">
           <?php 
@@ -728,7 +728,7 @@ session_start();
 
   <div class="arrival-discount-container">
     <div class="product-card">
-      <img src="assets/arrival_prod.jpg" alt="Product Image">
+      <img src="assets/arrival_prod.webp" alt="Product Image">
       <a href="product_display.php" class="view-button">View Product</a>
     </div>
     <div class="discount-card">
@@ -810,7 +810,7 @@ session_start();
 
 <div class="custom-filter-container">
   <div class="d-flex justify-content-center gap-4 flex-wrap">
-    <!-- Nike Filter -->
+
     <div class="dropdown">
       <button
         class="btn btn-light rounded-pill d-flex align-items-center px-4 py-2 dropdown-toggle"
@@ -1105,10 +1105,10 @@ session_start();
       <button class="visit-btn">Visit</button>
     </div>
     <div class="brand-products">
-      <div class="product-placeholder"></div>
-      <div class="product-placeholder"></div>
-      <div class="product-placeholder"></div>
-      <div class="product-placeholder"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/4.png"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/3.png"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/2.png"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/1.png"></div>
     </div>
   </div>
   <div class="brand-card">
@@ -1131,10 +1131,10 @@ session_start();
       <button class="visit-btn">Visit</button>
     </div>
     <div class="brand-products">
-      <div class="product-placeholder"></div>
-      <div class="product-placeholder"></div>
-      <div class="product-placeholder"></div>
-      <div class="product-placeholder"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/3.png"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/1.png"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/2.png"></div>
+    <div class="product-placeholder"><img class="product-placeholder" src="assets/dewalt/4  .png"></div>
     </div>
   </div>
 </div>
