@@ -571,46 +571,48 @@ i
         <div class="row row-cols-md-2">
             <div class="form-group">
                 <!-- Pre-populate Username input -->
-                <input type="text" class="form-control" id="username" placeholder=" " value="<?php echo isset($username) ? htmlspecialchars($username) : ''; ?>">
+                <input type="text" class="form-control" id="username" name="username" placeholder=" " value="<?php echo isset($username) ? htmlspecialchars($username) : ''; ?>">
                 <label for="username">Username</label>
             </div>
             <div class="form-group">
-                <input type="email" class="form-control" id="email" placeholder=" " value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>">
+                <input type="email" class="form-control" id="email" name="email" placeholder=" " value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>">
                 <label for="email">Email</label>
             </div>
         </div>
         <div class="row row-cols-md-2">
             <div class="form-group">
-                <input type="text" class="form-control" id="firstName" placeholder=" " value="<?php echo isset($firstName) ? htmlspecialchars($firstName) : ''; ?>">
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder=" " value="<?php echo isset($firstName) ? htmlspecialchars($firstName) : ''; ?>">
                 <label for="firstName">First Name</label>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="lastName" placeholder=" " value="<?php echo isset($secondName) ? htmlspecialchars($secondName) : ''; ?>">
+                <input type="text" class="form-control" id="lastName" name="lastName" placeholder=" " value="<?php echo isset($lastName) ? htmlspecialchars($lastName) : ''; ?>">
                 <label for="lastName">Last Name</label>
             </div>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" id="address" placeholder=" ">
+            <input type="text" class="form-control" id="address" name="address" placeholder=" " value="<?php echo isset($address) ? htmlspecialchars($address) : ''; ?>">
             <label for="address">Address</label>
         </div>
         <div class="row row-cols-md-3">
             <div class="form-group">
-                <select class="form-control" id="city" placeholder=" ">
+                <select class="form-control" id="city" name="city">
                     <option value="" disabled selected>Select City</option>
+                    <!-- Add city options here -->
                 </select>
                 <label for="city">City</label>
             </div>
-            <div class="form-group">
-                <select class="form-control" id="province" placeholder=" ">
+                <select class="form-control" id="province" name="province">
                     <option value="" selected>Select Province</option>
+                    <!-- Add province options here -->
                 </select>
                 <label for="province">Province</label>
-            </div>
+                <label for="province">Province</label>
+                <input type="text" class="form-control" id="postalCode" name="postalCode" placeholder=" " value="<?php echo isset($postalCode) ? htmlspecialchars($postalCode) : ''; ?>">
             <div class="form-group">
                 <input type="text" class="form-control" id="postalCode" placeholder=" ">
                 <label for="postalCode">Postal Code</label>
             </div>
-        </div>
+            <textarea class="form-control" id="aboutMe" name="aboutMe" placeholder=" "><?php echo isset($aboutMe) ? htmlspecialchars($aboutMe) : ''; ?></textarea>
         <div class="form-group">
             <textarea class="form-control" id="aboutMe" placeholder=" "></textarea>
             <label for="aboutMe">About Me</label>
