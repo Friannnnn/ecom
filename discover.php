@@ -683,7 +683,7 @@ session_start();
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="navbar-container">
       <div class="brand-search-group">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="discover.php">
           <img src="assets/logo_mini.jpg" alt="Logo" style="height: 50px; width: 50px; border-radius: 50%;">
         </a>
         <div class="input-container">
@@ -701,7 +701,7 @@ session_start();
         </button>
         <span class="separator">|</span>
 
-        <a href="profile.php" class="profile-link">
+        <a href="user-edit.php" class="profile-link">
 
         <div class="profile">
           <?php 

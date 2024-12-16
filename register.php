@@ -398,7 +398,7 @@ if (isset($_SESSION['name'])) {
         <div class="modal-content">
             <div class="modal-body">
                 <p class="modal-text">Would you like to set up your account?</p>
-                <a href="profile.php" class="landscape-btn" id="setupNowLink">Set Up Now</a> <br>
+                <a href="user-edit.php" class="landscape-btn" id="setupNowLink">Set Up Now</a> <br>
                 <a href="discover.php" class="maybe-later-text" id="maybeLaterLink">Maybe Later</a>
             </div>
         </div>
