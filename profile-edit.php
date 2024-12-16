@@ -1,4 +1,5 @@
 <?php 
+include 'config.php';
 session_start();
 
 if (!isset($_SESSION['email'])) {
@@ -6,7 +7,30 @@ if (!isset($_SESSION['email'])) {
     exit();
 }
 
-// Check if the form is submitted
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'] ?: null;
+    $email = $_POST['email'] ?: null;
+    $firstName = $_POST['firstName'] ?: null;
+    $lastName = $_POST['lastName'] ?: null;
+    $address = $_POST['address'] ?: null;
+    $city = $_POST['city'] ?: null;
+    $province = $_POST['province'] ?: null;
+    $postalCode = $_POST['postalCode'] ?: null;
+    $aboutMe = $_POST['aboutMe'] ?: null;
+
+    $stmt = $pdo->prepare('UPDATE users SET username = ?, email = ?, first_name = ?, last_name = ?, address = ?, city = ?, province = ?, postal_code = ?, about_me = ? WHERE email = ?');
+    $stmt->execute([$username, $email, $firstName, $lastName, $address, $city, $province, $postalCode, $aboutMe, $_SESSION['email']]);
+
+    // Update session email if changed
+    if ($email) {
+        $_SESSION['email'] = $email;
+    }
+
+    header('Location: profile-display.php');
+    exit();
+}
 
 ?>
 <!DOCTYPE html>

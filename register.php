@@ -6,6 +6,26 @@ session_start();
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+// Handle AJAX request to check if email exists
+if (isset($_GET['action']) && $_GET['action'] === 'check_email') {
+    $response = ['exists' => false];
+    header('Content-Type: application/json');
+    $response = ['exists' => false];
+    if (isset($_GET['email'])) {
+        $email = filter_var($_GET['email'], FILTER_VALIDATE_EMAIL);
+        if ($email) {
+            $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+            $stmt->bind_param('s', $email);
+            $stmt->execute();
+            $stmt->store_result();
+            $response['exists'] = $stmt->num_rows > 0;
+            $stmt->close();
+        }
+    }
+    
+    echo json_encode($response);
+    exit();
+}
 
 $googleClient = new Google_Client();
 $googleClient->setClientId('320054654260-fcptfeujln15q5biepe21obl7q2bkvr3.apps.googleusercontent.com');
@@ -15,7 +35,7 @@ $googleClient->addScope('email');
 $googleClient->addScope('profile');
 
 if (isset($_SESSION['name'])) {
-    header("location: profile-display.php");
+    header("Location: profile-display.php");
     exit();
 }
 
@@ -28,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
     $password = $_POST['password'] ?? '';
     $confirmPassword = $_POST['confirm_password'] ?? '';
+    $setupOption = $_POST['setup_option'] ?? ''; // Capture user's choice from modal
 
     if (!$email) {
         $errorMessage = 'Invalid email address.';
@@ -36,28 +57,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($password !== $confirmPassword) {
         $errorMessage = 'Passwords do not match.';
     } else {
-        // Insert the user data into the database (without hashing the password)
-        $stmt = $conn->prepare("INSERT INTO users (email, password, first_name, last_name, address, city, province, postal_code, about_me)
-                               VALUES (?, ?, NULL, NULL, NULL, NULL, NULL, NULL, NULL)");
+        // Check if email already exists
+        $checkStmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+        $checkStmt->bind_param('s', $email);
+        $checkStmt->execute();
+        $checkStmt->store_result();
 
-        // Bind the parameters
-        $stmt->bind_param('ss', $email, $password);
+        if ($checkStmt->num_rows > 0) {
+            $errorMessage = 'Email is already registered.';
+        } else {
+            $stmt = $conn->prepare("INSERT INTO users (email, password, first_name, last_name, address, city, province, postal_code, about_me)
+                                   VALUES (?, ?, NULL, NULL, NULL, NULL, NULL, NULL, NULL)");
 
-        // Execute the query
-        if ($stmt->execute()) {
-            $success = true;
-        
-            // Set session variable to trigger the redirect
-            $_SESSION['email'] = $email;
-            header("Location: profile-edit.php"); // Redirect to profile-edit page
-            exit();
+            // Insert new user with raw password
+            $stmt->bind_param('ss', $email, $password);
+
+            // Execute the query
+            if ($stmt->execute()) {
+                // Set session variables
+
+                $_SESSION['setup_option'] = $setupOption;
+
+                // Redirect based on setup option
+                if ($setupOption === 'now') {
+                    header("Location: profile-edit.php");
+                    exit();
+                } else {
+                    header("Location: index.php"); // Change to your desired URL for "Maybe Later"
+                    exit();
+                }
+                $_SESSION['email'] = $email;
+                // You can store the setup option if needed
+                $_SESSION['setup_option'] = $setupOption;
+            }
+            // Close the prepared statement
+            $stmt->close();
         }
-        // Close the prepared statement
-        $stmt->close();
+        $checkStmt->close();
     }
 }
 
 $conn->close();  // Close the database connection
+
+                                            
 ?>
 
 <!DOCTYPE html>
@@ -311,6 +353,114 @@ $conn->close();  // Close the database connection
             font-size: 12px;
             display: none;
         }
+
+        /* Modern Modal Styles */
+        .modal-content {
+            border-radius: 20px;
+            background-color: #fefefe;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background-color: #4CAF50;
+            border-bottom: none;
+        }
+
+        .modal-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .modal-body {
+            padding: 20px;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .modal-footer {
+            background-color: #f1f1f1;
+            border-top: none;
+            padding: 15px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-close {
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            opacity: 1;
+        }
+
+        .btn-close:hover {
+            color: #ddd;
+        }
+
+        /* Updated Modal Styles */
+        .modal-body {
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* Remove underline from "Maybe Later" button */
+        .btn-link {
+            font-size: 14px;
+            text-decoration: none;
+            color: #6c757d;
+            cursor: pointer;
+        }
+        
+        .btn-link:hover {
+            text-decoration: none;
+            color: #5a6268;
+        }
+
+        /* Registration Complete Message Styles */
+        .alert-success {
+            font-size: 1.2rem;
+            padding: 20px;
+            border-radius: 10px;
+        }
     </style>
 </head>
 
@@ -343,7 +493,7 @@ $conn->close();  // Close the database connection
                             <div id="error-message" class="error-message"><?php echo $errorMessage; ?></div>
                         <?php endif; ?>
                         <div class="text-center mb-3">
-                            <button type="submit" class="btn btn-create">
+                            <button type="submit" class="btn btn-create" id="createAccountButton">
                                 <span>Create</span>
                             </button>
                         </div>
@@ -364,6 +514,34 @@ $conn->close();  // Close the database connection
         </div>
     </div>
 
+    <!-- Registration Confirmation Modal -->
+        <div class="modal fade" id="registrationModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body text-center">
+                <p>Would you like to set up your account now or maybe later?</p>
+                <button type="button" class="btn btn-primary mt-3" id="setupNow">Set Up Now</button>
+                <button type="button" class="btn btn-link mt-2" id="maybeLater">Maybe Later</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+    <!-- Registration Complete Message -->
+    <?php if ($errorMessage): ?>
+        <div id="error-message" class="error-message text-center mb-3">
+            <?php echo htmlspecialchars($errorMessage); ?>
+        </div>
+    <?php endif; ?>
+    
+    <?php if ($success): ?>
+        <div class="container mt-5">
+            <div class="alert alert-success text-center" role="alert">
+                Registration Complete!
+            </div>
+        </div>
+    <?php endif; ?>
+
     <script>
         function togglePassword() {
             var passwordField = document.getElementById("password");
@@ -375,7 +553,82 @@ $conn->close();  // Close the database connection
                 passwordField.type = "password";
                 confirmPasswordField.type = "password";
             }
-        }
+        }        
+            document.addEventListener('DOMContentLoaded', () => {
+                const registerForm = document.getElementById('registerForm');
+                const registrationModal = new bootstrap.Modal(document.getElementById('registrationModal'));
+                const setupNowButton = document.getElementById('setupNow');
+                const maybeLaterButton = document.getElementById('maybeLater');
+
+                // Prevent form from submitting and show modal instead
+                registerForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    registrationModal.show();
+                });
+
+                // If user chooses to set up now, submit the form with setup_option = 'now'
+                setupNowButton.addEventListener('click', function() {
+                    const setupInput = document.createElement('input');
+                    setupInput.type = 'hidden';
+                    setupInput.name = 'setup_option';
+                    setupInput.value = 'now';
+                    registerForm.appendChild(setupInput);
+                    registrationModal.hide();
+                    registerForm.submit();
+                });
+
+                // If user chooses maybe later, submit the form with setup_option = 'later'
+                maybeLaterButton.addEventListener('click', function() {
+                    const setupInput = document.createElement('input');
+                    setupInput.type = 'hidden';
+                    setupInput.name = 'setup_option';
+                    setupInput.value = 'later';
+                    registerForm.appendChild(setupInput);
+                    registrationModal.hide();
+                    registerForm.submit();
+                });
+            });
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var confirmPasswordField = document.getElementById("confirm-password");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                confirmPasswordField.type = "text";
+            } else {
+                passwordField.type = "password";
+                confirmPasswordField.type = "password";
+            }
+        }        
+            document.addEventListener('DOMContentLoaded', () => {
+                const registerForm = document.getElementById('registerForm');
+                const registrationModal = new bootstrap.Modal(document.getElementById('registrationModal'));
+                const setupNowButton = document.getElementById('setupNow');
+        
+                // Prevent form from submitting and show modal instead
+                registerForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    registrationModal.show();
+                });
+        
+                // If user chooses to set up now, submit the form
+                setupNowButton.addEventListener('click', function() {
+                    registrationModal.hide();
+                    registerForm.submit();
+                });
+        
+                // "Maybe Later" button automatically dismisses the modal and redirects
+                const maybeLaterButtons = document.querySelectorAll('.modal-footer .btn-secondary');
+                maybeLaterButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        window.location.href = 'index.php'; // Change to your desired URL
+                    });
+                });
+            });
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

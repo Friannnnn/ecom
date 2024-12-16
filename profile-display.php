@@ -1,10 +1,45 @@
 <?php 
+include 'config.php';
 session_start();
 
 if (!isset($_SESSION['email'])) {
     header('Location: login.php');
     exit();
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'] ?: null;
+    $email = $_POST['email'] ?: null;
+    $firstName = $_POST['firstName'] ?: null;
+    $lastName = $_POST['lastName'] ?: null;
+    $address = $_POST['address'] ?: null;
+    $city = $_POST['city'] ?: null;
+    $province = $_POST['province'] ?: null;
+    $postalCode = $_POST['postalCode'] ?: null;
+    $aboutMe = $_POST['aboutMe'] ?: null;
+
+    // Prepare and bind
+    $stmt = $conn->prepare('UPDATE users SET username = ?, email = ?, first_name = ?, last_name = ?, address = ?, city = ?, province = ?, postal_code = ?, about_me = ? WHERE email = ?');
+    if ($stmt === false) {
+        die('Prepare failed: ' . htmlspecialchars($conn->error));
+    }
+
+    $stmt->bind_param('ssssssssss', $username, $email, $firstName, $lastName, $address, $city, $province, $postalCode, $aboutMe, $_SESSION['email']);
+
+    if ($stmt->execute()) {
+        // Update session email if changed
+        if ($email) {
+            $_SESSION['email'] = $email;
+        }
+        header('Location: profile-display.php');
+        exit();
+    } else {
+        die('Execute failed: ' . htmlspecialchars($stmt->error));
+    }
+
+    $stmt->close();
+}
+
 ?>
 
 <!DOCTYPE html>
